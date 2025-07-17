@@ -1,0 +1,45 @@
+{
+    "Diver": {
+        "Productielijn": "Diver",
+        "Type": "DI801",
+        "Aantal": "15",
+        "Productie modus": {
+            "Modus": "Series",
+            "Start Serienummer": "TW059",
+            "Eind Serienummer": "TW073",
+            "Serienummers": "TW059\nTW060\nTW061\nTW062\nTW063\nTW064\nTW065\nTW066\nTW067\nTW068\nTW069\nTW070\nTW071\nTW072\nTW073"
+        },
+        "Ordernummer": "",
+        "Datum": "16-07-2025",
+        "Naam medewerker": "",
+        "Instellingen OK": false,
+        "Checklist OK": {
+            "Juiste nulspanplaat gebruikt": false,
+            "Graveermachine correct ingesteld": false,
+            "Juiste submodules geplaatst": false,
+            "divers geplaatst": false
+        }
+    },
+    "CTD": {
+        "Productielijn": "CTD",
+        "Type": "DI281",
+        "Aantal": "15",
+        "Productie modus": {
+            "Modus": "Series",
+            "Start Serienummer": "N0117",
+            "Eind Serienummer": "N0131",
+            "Serienummers": "N0117\nN0118\nN0119\nN0120\nN0121\nN0122\nN0123\nN0124\nN0125\nN0126\nN0127\nN0128\nN0129\nN0130\nN0131"
+        },
+        "Ordernummer": "",
+        "Datum": "16-07-2025",
+        "Naam medewerker": "",
+        "Instellingen OK": false,
+        "Checklist OK": {
+            "Juiste nulspanplaat gebruikt": false,
+            "Graveermachine correct ingesteld": false,
+            "Juiste submodules geplaatst": false,
+            "ctd's geplaatst": false
+        }
+    },
+    "": {}
+}
