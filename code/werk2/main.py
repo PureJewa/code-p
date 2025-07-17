@@ -1,14 +1,14 @@
 #**Main
 
-from werk2.imports import *
-from werk2.gui.widgets.widget import *
-from werk2.logic.config import *
-from werk2.logic.JsonHandler import *
-from werk2.logic.validation.general import *
-from werk2.helperfunctions import *
-from werk2.logic.config import PRODUCT_CONFIG, LOGO_IMAGE, OFF_IMAGE
-from werk2.helperfunctions import reset_app
-from werk2.arduinoComm import *
+from imports import *
+from gui.widgets.widget import *
+from logic.config import *
+from logic.JsonHandler import *
+from logic.validation.general import *
+from helperfunctions import *
+from logic.config import PRODUCT_CONFIG, LOGO_IMAGE, OFF_IMAGE
+from helperfunctions import reset_app
+from arduinoComm import *
 
 
 
@@ -16,7 +16,8 @@ class App(ctk.CTk):
     def __init__(self):
         super().__init__()
         self.title("Assemblagelijn")
-        self.overrideredirect(True)  # Verwijdert titelbalk
+        # self.overrideredirect(True)  # Verwijdert titelbalk
+        self.attributes('-fullscreen', True)
 
         # Zet de grootte van het venster gelijk aan de schermresolutie
         self.screen_width = self.winfo_screenwidth()
@@ -131,7 +132,7 @@ class App(ctk.CTk):
 
         # Aantal invoer
         ctk.CTkLabel(self.main_frame, text="Aantal", font=self.font).pack(pady=2)
-        self.amount_entry = ctk.CTkEntry(self.main_frame, state="disabled", font=self.font)
+        self.amount_entry = ctk.CTkEntry(self.main_frame, state="normal", font=self.font)
         self.amount_entry.pack(pady=2)
         self.check_amount_button = ctk.CTkButton(self.main_frame, text="Check Aantal", command=self.check_amount, state="disabled", font=self.font)
         self.check_amount_button.pack(pady=2)

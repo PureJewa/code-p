@@ -1,0 +1,6 @@
+numpy
+opencv-python
+customtkinter
+requests
+datetime
+pillow

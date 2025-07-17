@@ -1,5 +1,5 @@
 import customtkinter as ctk
-from werk2.imports import *
+from imports import *
 BESTAND_INSTELLINGEN = "data/instellingen.json"
 BESTAND_GESCHIEDENIS = "data/geschiedenis.json"
 _logo_pil = Image.open("img/logo.png")

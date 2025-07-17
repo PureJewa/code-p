@@ -1,4 +1,4 @@
-from werk.imports import *
+from imports import *
 
 class CustomDateEntry(ctk.CTkEntry):
     def __init__(self, master=None, **kwargs):

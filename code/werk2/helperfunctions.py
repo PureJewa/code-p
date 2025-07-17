@@ -1,11 +1,11 @@
 #** helperfunctions
 
-from werk2.imports import *
-from werk2.logic.config import *
-from werk2.logic.validation.general import *
-from werk2.logic.JsonHandler import  *
-from werk2.logic.config import PRODUCT_CONFIG, DIVER, CTD, SERIE, ENKEL
-from werk2.arduinoComm import *
+from imports import *
+from logic.config import *
+from logic.validation.general import *
+from logic.JsonHandler import  *
+from logic.config import PRODUCT_CONFIG, DIVER, CTD, SERIE, ENKEL
+from arduinoComm import *
 def make_line(app):
     ctk.CTkFrame(app.main_frame, height=2, width=app.screen_width, fg_color="gray").pack(pady=1)
 

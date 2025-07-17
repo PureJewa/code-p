@@ -1,5 +1,5 @@
-from werk.imports import *
-from werk.logic.config import *
+from imports import *
+from logic.config import *
 def save_settings(product, data):
     try:
         # Laad bestaande instellingen
