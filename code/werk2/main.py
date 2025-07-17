@@ -6,11 +6,23 @@ from logic.config import *
 from logic.JsonHandler import *
 from logic.validation.general import *
 from helperfunctions import *
-from logic.config import PRODUCT_CONFIG, LOGO_IMAGE, OFF_IMAGE
+from logic.config import PRODUCT_CONFIG
 from helperfunctions import reset_app
 from arduinoComm import *
 
+# Dynamisch pad bepalen op basis van waar dit script staat
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
+# Volledige paden naar afbeeldingen
+logo_path = os.path.join(BASE_DIR, "img", "logo.png")
+off_path = os.path.join(BASE_DIR, "img", "img.png")
+
+# Afbeeldingen laden
+_logo_pil = Image.open(logo_path)
+_off_pil = Image.open(off_path)
+
+LOGO_IMAGE = _logo_pil
+OFF_IMAGE = _off_pil
 
 class App(ctk.CTk):
     def __init__(self):

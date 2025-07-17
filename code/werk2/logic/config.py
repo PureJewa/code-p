@@ -2,11 +2,11 @@ import customtkinter as ctk
 from imports import *
 BESTAND_INSTELLINGEN = "data/instellingen.json"
 BESTAND_GESCHIEDENIS = "data/geschiedenis.json"
-_logo_pil = Image.open("img/logo.png")
-_off_pil = Image.open("img/img.png")
-
-LOGO_IMAGE = _logo_pil
-OFF_IMAGE = _off_pil
+# _logo_pil = Image.open("img/logo.png")
+# _off_pil = Image.open("img/img.png")
+#
+# LOGO_IMAGE = _logo_pil
+# OFF_IMAGE = _off_pil
 
 
 DIVER = "Diver"
