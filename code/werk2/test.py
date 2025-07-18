@@ -1,111 +1,57 @@
-# import serial
-# import serial.tools.list_ports
-#
-# def find_adafruit_scanner():
-#     # Zoek alle seriële poorten en probeer de Adafruit scanner te herkennen
-#     ports = list(serial.tools.list_ports.comports())
-#     for port in ports:
-#         # Vaak herken je de scanner aan de naam, fabrikant of productomschrijving
-#         if "" in port.description or "USB Serial Device" in port.description or "FTDI" in port.description:
-#             print(f"Gevonden Adafruit scanner op: {port.device}")
-#             return port.device
-#     print("Adafruit scanner niet gevonden. Controleer verbinding.")
-#     return None
-#
-# def main():
-#     port_name = find_adafruit_scanner()
-#     if port_name is None:
-#         return
-#
-#     try:
-#         while True:
-#             input("Druk op Enter en scan de barcode...")
-#             print("Wachten op barcode...")
-#             # Probeer verbinding te maken met de poort
-#             barcodeSer = serial.Serial(port_name, baudrate, timeout=5)
-#             print(f"Verbonden met {port_name}. Wachten op gegevens...")
-#
-#             # Wachten op data van de scanner
-#             barcodeData = barcodeSer.readline().decode('utf-8').strip()
-#             barcodeSer.close()
-#
-#             if data:
-#                 print(f"Barcode gescand op : {barcodeData}")
-#                 return True
-#             else:
-#                 print(f"Geen gegevens ontvangen van .")
-#     except Exception as e:
-#         print("Fout bij : ")
-#
-#
-# if __name__ == "__main__":
-#     main()
-# import serial
-# import time
-#
-#
-# def barcode_to_raspberry(port='COM9', baudrate=9600, timeout=5):
-#     try:
-#         # Maak verbinding met de scanner
-#         with serial.Serial(port, baudrate, timeout=timeout) as barcodeSer:
-#             print(f"Verbonden met {port}. Wacht op barcode scan...")
-#
-#             # Wacht tot gebruiker aangeeft dat scan start (optioneel)
-#             input("Druk op Enter om te scannen...")
-#
-#             # Lees een regel barcode data
-#             barcodeData = barcodeSer.readline().decode('utf-8').strip()
-#
-#             if barcodeData:
-#                 print(f"Barcode gescand op {port}: {barcodeData}")
-#                 return True
-#             else:
-#                 print(f"Geen barcode ontvangen op {port}. Probeer opnieuw.")
-#                 return False
-#     except serial.SerialException as e:
-#         print(f"Fout bij verbinden met {port}: {e}")
-#         return False
-#     except Exception as e:
-#         print(f"Onverwachte fout: {e}")
-#         return False
-#
-#
-# if __name__ == "__main__":
-#     # Pas poort hier aan indien nodig
-#     success = barcode_to_raspberry()
-#     if not success:
-#         print("Scan niet gelukt.")
 import serial
 import serial.tools.list_ports
-def find_adafruit_scanner():
-    # Zoek alle seriële poorten en probeer de Adafruit scanner te herkennen
-    ports = list(serial.tools.list_ports.comports())
+
+def find_usb_device(vid, pid):
+    """Zoek naar het USB-apparaat op basis van VID en PID."""
+    ports = serial.tools.list_ports.comports()
     for port in ports:
-        # Vaak herken je de scanner aan de naam, fabrikant of productomschrijving
-        if "Adafruit" in port.description or "" in port.description or "FTDI" in port.description:
-            print(f"Gevonden Adafruit scanner op: {port.device}")
+        # Controleer op VID en PID
+        if port.vid == vid and port.pid == pid:
+            print(f"Apparaat gevonden: {port.description}, op {port.device}")
             return port.device
-    print("Adafruit scanner niet gevonden. Controleer verbinding.")
+    print("Geen apparaat gevonden")
     return None
-#
 
-def read_barcode():
-    port = find_adafruit_scanner()
-    # Open de seriële poort (pas de poortnaam aan als nodig)
-    ser = serial.Serial('COM19', baudrate=9600, timeout=1)
-
-    print("Wachten op barcode...")
-
+def read_barcode(port, baudrate=9600, timeout=2):
+    """Lees de barcode van de opgegeven seriële poort."""
     try:
-        while True:
-            if ser.in_waiting > 0:  # Controleer of er gegevens zijn
-                data = ser.readline().decode('utf-8').strip()  # Lees de gegevens
-                print(f"Barcode gescand: {data}")
-    except KeyboardInterrupt:
-        print("\nProgramma gestopt.")
-    finally:
-        ser.close()
-
+        with serial.Serial(port, baudrate, timeout=timeout) as ser:
+            print(f"Verbonden met {port}. Wachten op barcode...")
+            while True:
+                # Lees de barcode en verwijder ongewenste witruimtes
+                data = ser.readline().decode('utf-8').strip()
+                if data:
+                    print(f"Barcode gescand: {data}")
+                    return data
+                else:
+                    print("Wachten op barcode...")
+    except serial.SerialException as e:
+        print(f"Fout bij het openen van de seriële poort: {e}")
+        return None
+    except Exception as e:
+        print(f"Onverwachte fout: {e}")
+        return None
 
 if __name__ == "__main__":
-    read_barcode()
+    # Definieer VID en PID van de barcodescanner
+    vid_barcodescanner = 0x0483  # Vervang door jouw VID voor de barcodescanner
+    pid_barcodescanner = 0x5740  # Vervang door jouw PID voor de barcodescanner
+
+    # Definieer VID en PID voor de Arduino Due
+    vid_arduino_due = 0x2a03  # VID voor Arduino Due
+    pid_arduino_due = 0x003d  # PID voor Arduino Due
+
+    # Zoek naar de barcodescanner
+    port_barcodescanner = find_usb_device(vid_barcodescanner, pid_barcodescanner)
+
+    # Zoek naar de Arduino Due
+    port_arduino_due = find_usb_device(vid_arduino_due, pid_arduino_due)
+
+    # Lees de barcode van de barcodescanner als gevonden
+    if port_barcodescanner:
+        read_barcode(port_barcodescanner)
+
+    # Lees van de Arduino Due als gevonden (meestal gebruikt voor seriële communicatie)
+    if port_arduino_due:
+        print(f"Verbonden met Arduino Due op {port_arduino_due}. Wachten op data...")
+        # read_barcode(port_arduino_due)  # Dit kan aangepast worden, afhankelijk van de Arduino sketch
