@@ -1,46 +1,111 @@
-import customtkinter as ctk
+# import serial
+# import serial.tools.list_ports
+#
+# def find_adafruit_scanner():
+#     # Zoek alle seriële poorten en probeer de Adafruit scanner te herkennen
+#     ports = list(serial.tools.list_ports.comports())
+#     for port in ports:
+#         # Vaak herken je de scanner aan de naam, fabrikant of productomschrijving
+#         if "" in port.description or "USB Serial Device" in port.description or "FTDI" in port.description:
+#             print(f"Gevonden Adafruit scanner op: {port.device}")
+#             return port.device
+#     print("Adafruit scanner niet gevonden. Controleer verbinding.")
+#     return None
+#
+# def main():
+#     port_name = find_adafruit_scanner()
+#     if port_name is None:
+#         return
+#
+#     try:
+#         while True:
+#             input("Druk op Enter en scan de barcode...")
+#             print("Wachten op barcode...")
+#             # Probeer verbinding te maken met de poort
+#             barcodeSer = serial.Serial(port_name, baudrate, timeout=5)
+#             print(f"Verbonden met {port_name}. Wachten op gegevens...")
+#
+#             # Wachten op data van de scanner
+#             barcodeData = barcodeSer.readline().decode('utf-8').strip()
+#             barcodeSer.close()
+#
+#             if data:
+#                 print(f"Barcode gescand op : {barcodeData}")
+#                 return True
+#             else:
+#                 print(f"Geen gegevens ontvangen van .")
+#     except Exception as e:
+#         print("Fout bij : ")
+#
+#
+# if __name__ == "__main__":
+#     main()
+# import serial
+# import time
+#
+#
+# def barcode_to_raspberry(port='COM9', baudrate=9600, timeout=5):
+#     try:
+#         # Maak verbinding met de scanner
+#         with serial.Serial(port, baudrate, timeout=timeout) as barcodeSer:
+#             print(f"Verbonden met {port}. Wacht op barcode scan...")
+#
+#             # Wacht tot gebruiker aangeeft dat scan start (optioneel)
+#             input("Druk op Enter om te scannen...")
+#
+#             # Lees een regel barcode data
+#             barcodeData = barcodeSer.readline().decode('utf-8').strip()
+#
+#             if barcodeData:
+#                 print(f"Barcode gescand op {port}: {barcodeData}")
+#                 return True
+#             else:
+#                 print(f"Geen barcode ontvangen op {port}. Probeer opnieuw.")
+#                 return False
+#     except serial.SerialException as e:
+#         print(f"Fout bij verbinden met {port}: {e}")
+#         return False
+#     except Exception as e:
+#         print(f"Onverwachte fout: {e}")
+#         return False
+#
+#
+# if __name__ == "__main__":
+#     # Pas poort hier aan indien nodig
+#     success = barcode_to_raspberry()
+#     if not success:
+#         print("Scan niet gelukt.")
+import serial
+import serial.tools.list_ports
+def find_adafruit_scanner():
+    # Zoek alle seriële poorten en probeer de Adafruit scanner te herkennen
+    ports = list(serial.tools.list_ports.comports())
+    for port in ports:
+        # Vaak herken je de scanner aan de naam, fabrikant of productomschrijving
+        if "Adafruit" in port.description or "" in port.description or "FTDI" in port.description:
+            print(f"Gevonden Adafruit scanner op: {port.device}")
+            return port.device
+    print("Adafruit scanner niet gevonden. Controleer verbinding.")
+    return None
+#
 
-class ControleScherm(ctk.CTkFrame):
-    def __init__(self, master, data):
-        """
-        data: dict van serienummer -> dict van stapnaam -> status (bool)
-        """
-        super().__init__(master)
+def read_barcode():
+    port = find_adafruit_scanner()
+    # Open de seriële poort (pas de poortnaam aan als nodig)
+    ser = serial.Serial('COM19', baudrate=9600, timeout=1)
 
-        self.data = data
-        self.stappen = list(next(iter(data.values())).keys())  # neem stappen van eerste item
+    print("Wachten op barcode...")
 
-        # Header row met stappen
-        ctk.CTkLabel(self, text="Serienummer", width=120, anchor="w", font=ctk.CTkFont(weight="bold")).grid(row=0, column=0, padx=5, pady=5)
+    try:
+        while True:
+            if ser.in_waiting > 0:  # Controleer of er gegevens zijn
+                data = ser.readline().decode('utf-8').strip()  # Lees de gegevens
+                print(f"Barcode gescand: {data}")
+    except KeyboardInterrupt:
+        print("\nProgramma gestopt.")
+    finally:
+        ser.close()
 
-        for col, stap in enumerate(self.stappen, start=1):
-            ctk.CTkLabel(self, text=stap, width=150, anchor="w", font=ctk.CTkFont(weight="bold")).grid(row=0, column=col, padx=5, pady=5)
-
-        # Data rijen
-        for row, (serial, stap_status) in enumerate(self.data.items(), start=1):
-            ctk.CTkLabel(self, text=serial, width=120, anchor="w").grid(row=row, column=0, padx=5, pady=5)
-
-            for col, stap in enumerate(self.stappen, start=1):
-                status = stap_status.get(stap, False)
-                kleur = "green" if status else "red"
-                symbool = "✔" if status else "✘"
-
-                label = ctk.CTkLabel(self, text=symbool, fg_color=kleur, text_color="white", width=30, height=30, corner_radius=15)
-                label.grid(row=row, column=col, padx=10, pady=5)
 
 if __name__ == "__main__":
-    root = ctk.CTk()
-    root.geometry("700x400")
-
-    # Voorbeeld data
-    voorbeeld_data = {
-        "SN1001": {"Materialen verzamelen": True, "Assemblage": True, "Kwaliteitscontrole": False, "Verpakking": True},
-        "SN1002": {"Materialen verzamelen": True, "Assemblage": True, "Kwaliteitscontrole": True, "Verpakking": True},
-        "SN1003": {"Materialen verzamelen": False, "Assemblage": False, "Kwaliteitscontrole": False, "Verpakking": False},
-        # etc...
-    }
-
-    scherm = ControleScherm(root, voorbeeld_data)
-    scherm.pack(fill="both", expand=True)
-
-    root.mainloop()
+    read_barcode()
