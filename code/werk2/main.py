@@ -756,7 +756,7 @@ class App(ctk.CTk):
             if "ARDUINO_Programmeren_OK" in msg:
                 _, serial = msg.strip().split(":")
 
-                self.update_step_status_for_serial(serial.strip(), "Programmeren", True)
+                self.update_step_status_for_serial(serial.strip(), "Programmeren", True,_)
 
             if "ARDUINO_Graveren_OK" in msg:
                 _, serial = msg.strip().split(":")
@@ -766,11 +766,11 @@ class App(ctk.CTk):
 
             if "ARDUINO_Controle" in msg:
                 _, serial = msg.strip().split(":")
-                self.update_step_status_for_serial(serial.strip(), "Controle", True)
+                self.update_step_status_for_serial(serial.strip(), "Controle", True,_)
                 read_barcode(device_ports["barcodescanner"])
             if "ARDUINO_Verpakken_OK" in msg:
                 _, serial = msg.strip().split(":")
-                self.update_step_status_for_serial(serial.strip(), "Verpakken", True)
+                self.update_step_status_for_serial(serial.strip(), "Verpakken", True,_)
 
         if not stop_event.is_set():
             self.after(100, self.poll_arduino)
