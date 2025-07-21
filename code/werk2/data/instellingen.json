@@ -5,13 +5,20 @@
         "Aantal": "5",
         "Productie modus": {
             "Modus": "Series",
-            "Start Serienummer": "TW156",
-            "Eind Serienummer": "TW160",
-            "Serienummers": "TW156\nTW157\nTW158\nTW159\nTW160"
+            "Start Serienummer": "TW200",
+            "Eind Serienummer": "TW204",
+            "Serienummers": "TW200\nTW201\nTW202\nTW203\nTW204"
         },
         "Ordernummer": "",
-        "Datum": "18-07-2025",
-        "Naam medewerker": ""
+        "Datum": "21-07-2025",
+        "Naam medewerker": "",
+        "Instellingen OK": false,
+        "Checklist OK": {
+            "Juiste nulspanplaat gebruikt": false,
+            "Graveermachine correct ingesteld": false,
+            "Juiste submodules geplaatst": false,
+            "divers geplaatst": false
+        }
     },
     "CTD": {
         "Productielijn": "CTD",

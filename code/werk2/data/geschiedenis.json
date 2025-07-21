@@ -7371,5 +7371,453 @@
                 "ctd's geplaatst": false
             }
         }
+    },
+    {
+        "product": "Diver",
+        "tijd": "2025-07-21T07:54:22.090477",
+        "data": {
+            "Productielijn": "Diver",
+            "Type": "DI801",
+            "Aantal": "5",
+            "Productie modus": {
+                "Modus": "Series",
+                "Start Serienummer": "TW160",
+                "Eind Serienummer": "TW164",
+                "Serienummers": "TW160\nTW161\nTW162\nTW163\nTW164"
+            },
+            "Ordernummer": "",
+            "Datum": "21-07-2025",
+            "Naam medewerker": ""
+        }
+    },
+    {
+        "product": "Diver",
+        "tijd": "2025-07-21T07:58:15.177183",
+        "data": {
+            "Productielijn": "Diver",
+            "Type": "DI801",
+            "Aantal": "5",
+            "Productie modus": {
+                "Modus": "Series",
+                "Start Serienummer": "TW164",
+                "Eind Serienummer": "TW168",
+                "Serienummers": "TW164\nTW165\nTW166\nTW167\nTW168"
+            },
+            "Ordernummer": "",
+            "Datum": "21-07-2025",
+            "Naam medewerker": ""
+        }
+    },
+    {
+        "product": "Diver",
+        "tijd": "2025-07-21T07:58:25.184501",
+        "data": {
+            "Productielijn": "Diver",
+            "Type": "DI801",
+            "Aantal": "5",
+            "Productie modus": {
+                "Modus": "Series",
+                "Start Serienummer": "TW164",
+                "Eind Serienummer": "TW168",
+                "Serienummers": "TW164\nTW165\nTW166\nTW167\nTW168"
+            },
+            "Ordernummer": "",
+            "Datum": "21-07-2025",
+            "Naam medewerker": "",
+            "Instellingen OK": false,
+            "Checklist OK": {
+                "Juiste nulspanplaat gebruikt": false,
+                "Graveermachine correct ingesteld": false,
+                "Juiste submodules geplaatst": false,
+                "divers geplaatst": false
+            }
+        }
+    },
+    {
+        "product": "Diver",
+        "tijd": "2025-07-21T08:02:42.165025",
+        "data": {
+            "Productielijn": "Diver",
+            "Type": "DI801",
+            "Aantal": "5",
+            "Productie modus": {
+                "Modus": "Series",
+                "Start Serienummer": "TW168",
+                "Eind Serienummer": "TW172",
+                "Serienummers": "TW168\nTW169\nTW170\nTW171\nTW172"
+            },
+            "Ordernummer": "",
+            "Datum": "21-07-2025",
+            "Naam medewerker": ""
+        }
+    },
+    {
+        "product": "Diver",
+        "tijd": "2025-07-21T08:02:46.409885",
+        "data": {
+            "Productielijn": "Diver",
+            "Type": "DI801",
+            "Aantal": "5",
+            "Productie modus": {
+                "Modus": "Series",
+                "Start Serienummer": "TW168",
+                "Eind Serienummer": "TW172",
+                "Serienummers": "TW168\nTW169\nTW170\nTW171\nTW172"
+            },
+            "Ordernummer": "",
+            "Datum": "21-07-2025",
+            "Naam medewerker": "",
+            "Instellingen OK": false,
+            "Checklist OK": {
+                "Juiste nulspanplaat gebruikt": false,
+                "Graveermachine correct ingesteld": false,
+                "Juiste submodules geplaatst": false,
+                "divers geplaatst": false
+            }
+        }
+    },
+    {
+        "product": "Diver",
+        "tijd": "2025-07-21T08:06:53.618501",
+        "data": {
+            "Productielijn": "Diver",
+            "Type": "DI801",
+            "Aantal": "5",
+            "Productie modus": {
+                "Modus": "Series",
+                "Start Serienummer": "TW172",
+                "Eind Serienummer": "TW176",
+                "Serienummers": "TW172\nTW173\nTW174\nTW175\nTW176"
+            },
+            "Ordernummer": "",
+            "Datum": "21-07-2025",
+            "Naam medewerker": ""
+        }
+    },
+    {
+        "product": "Diver",
+        "tijd": "2025-07-21T08:06:57.959484",
+        "data": {
+            "Productielijn": "Diver",
+            "Type": "DI801",
+            "Aantal": "5",
+            "Productie modus": {
+                "Modus": "Series",
+                "Start Serienummer": "TW172",
+                "Eind Serienummer": "TW176",
+                "Serienummers": "TW172\nTW173\nTW174\nTW175\nTW176"
+            },
+            "Ordernummer": "",
+            "Datum": "21-07-2025",
+            "Naam medewerker": "",
+            "Instellingen OK": false,
+            "Checklist OK": {
+                "Juiste nulspanplaat gebruikt": false,
+                "Graveermachine correct ingesteld": false,
+                "Juiste submodules geplaatst": false,
+                "divers geplaatst": false
+            }
+        }
+    },
+    {
+        "product": "Diver",
+        "tijd": "2025-07-21T08:20:03.440479",
+        "data": {
+            "Productielijn": "Diver",
+            "Type": "DI801",
+            "Aantal": "5",
+            "Productie modus": {
+                "Modus": "Series",
+                "Start Serienummer": "TW176",
+                "Eind Serienummer": "TW180",
+                "Serienummers": "TW176\nTW177\nTW178\nTW179\nTW180"
+            },
+            "Ordernummer": "",
+            "Datum": "21-07-2025",
+            "Naam medewerker": ""
+        }
+    },
+    {
+        "product": "Diver",
+        "tijd": "2025-07-21T08:20:06.360585",
+        "data": {
+            "Productielijn": "Diver",
+            "Type": "DI801",
+            "Aantal": "5",
+            "Productie modus": {
+                "Modus": "Series",
+                "Start Serienummer": "TW176",
+                "Eind Serienummer": "TW180",
+                "Serienummers": "TW176\nTW177\nTW178\nTW179\nTW180"
+            },
+            "Ordernummer": "",
+            "Datum": "21-07-2025",
+            "Naam medewerker": "",
+            "Instellingen OK": false,
+            "Checklist OK": {
+                "Juiste nulspanplaat gebruikt": false,
+                "Graveermachine correct ingesteld": false,
+                "Juiste submodules geplaatst": false,
+                "divers geplaatst": false
+            }
+        }
+    },
+    {
+        "product": "Diver",
+        "tijd": "2025-07-21T08:22:21.812767",
+        "data": {
+            "Productielijn": "Diver",
+            "Type": "DI801",
+            "Aantal": "5",
+            "Productie modus": {
+                "Modus": "Series",
+                "Start Serienummer": "TW180",
+                "Eind Serienummer": "TW184",
+                "Serienummers": "TW180\nTW181\nTW182\nTW183\nTW184"
+            },
+            "Ordernummer": "",
+            "Datum": "21-07-2025",
+            "Naam medewerker": ""
+        }
+    },
+    {
+        "product": "Diver",
+        "tijd": "2025-07-21T08:22:28.339962",
+        "data": {
+            "Productielijn": "Diver",
+            "Type": "DI801",
+            "Aantal": "5",
+            "Productie modus": {
+                "Modus": "Series",
+                "Start Serienummer": "TW180",
+                "Eind Serienummer": "TW184",
+                "Serienummers": "TW180\nTW181\nTW182\nTW183\nTW184"
+            },
+            "Ordernummer": "",
+            "Datum": "21-07-2025",
+            "Naam medewerker": "",
+            "Instellingen OK": false,
+            "Checklist OK": {
+                "Juiste nulspanplaat gebruikt": false,
+                "Graveermachine correct ingesteld": false,
+                "Juiste submodules geplaatst": false,
+                "divers geplaatst": false
+            }
+        }
+    },
+    {
+        "product": "Diver",
+        "tijd": "2025-07-21T08:24:00.343822",
+        "data": {
+            "Productielijn": "Diver",
+            "Type": "DI801",
+            "Aantal": "5",
+            "Productie modus": {
+                "Modus": "Series",
+                "Start Serienummer": "TW184",
+                "Eind Serienummer": "TW188",
+                "Serienummers": "TW184\nTW185\nTW186\nTW187\nTW188"
+            },
+            "Ordernummer": "",
+            "Datum": "21-07-2025",
+            "Naam medewerker": ""
+        }
+    },
+    {
+        "product": "Diver",
+        "tijd": "2025-07-21T08:24:04.018750",
+        "data": {
+            "Productielijn": "Diver",
+            "Type": "DI801",
+            "Aantal": "5",
+            "Productie modus": {
+                "Modus": "Series",
+                "Start Serienummer": "TW184",
+                "Eind Serienummer": "TW188",
+                "Serienummers": "TW184\nTW185\nTW186\nTW187\nTW188"
+            },
+            "Ordernummer": "",
+            "Datum": "21-07-2025",
+            "Naam medewerker": "",
+            "Instellingen OK": false,
+            "Checklist OK": {
+                "Juiste nulspanplaat gebruikt": false,
+                "Graveermachine correct ingesteld": false,
+                "Juiste submodules geplaatst": false,
+                "divers geplaatst": false
+            }
+        }
+    },
+    {
+        "product": "Diver",
+        "tijd": "2025-07-21T08:26:20.608351",
+        "data": {
+            "Productielijn": "Diver",
+            "Type": "DI801",
+            "Aantal": "5",
+            "Productie modus": {
+                "Modus": "Series",
+                "Start Serienummer": "TW188",
+                "Eind Serienummer": "TW192",
+                "Serienummers": "TW188\nTW189\nTW190\nTW191\nTW192"
+            },
+            "Ordernummer": "",
+            "Datum": "21-07-2025",
+            "Naam medewerker": ""
+        }
+    },
+    {
+        "product": "Diver",
+        "tijd": "2025-07-21T08:26:23.652671",
+        "data": {
+            "Productielijn": "Diver",
+            "Type": "DI801",
+            "Aantal": "5",
+            "Productie modus": {
+                "Modus": "Series",
+                "Start Serienummer": "TW188",
+                "Eind Serienummer": "TW192",
+                "Serienummers": "TW188\nTW189\nTW190\nTW191\nTW192"
+            },
+            "Ordernummer": "",
+            "Datum": "21-07-2025",
+            "Naam medewerker": "",
+            "Instellingen OK": false,
+            "Checklist OK": {
+                "Juiste nulspanplaat gebruikt": false,
+                "Graveermachine correct ingesteld": false,
+                "Juiste submodules geplaatst": false,
+                "divers geplaatst": false
+            }
+        }
+    },
+    {
+        "product": "Diver",
+        "tijd": "2025-07-21T08:27:35.149463",
+        "data": {
+            "Productielijn": "Diver",
+            "Type": "DI801",
+            "Aantal": "5",
+            "Productie modus": {
+                "Modus": "Series",
+                "Start Serienummer": "TW192",
+                "Eind Serienummer": "TW196",
+                "Serienummers": "TW192\nTW193\nTW194\nTW195\nTW196"
+            },
+            "Ordernummer": "",
+            "Datum": "21-07-2025",
+            "Naam medewerker": ""
+        }
+    },
+    {
+        "product": "Diver",
+        "tijd": "2025-07-21T08:27:38.709931",
+        "data": {
+            "Productielijn": "Diver",
+            "Type": "DI801",
+            "Aantal": "5",
+            "Productie modus": {
+                "Modus": "Series",
+                "Start Serienummer": "TW192",
+                "Eind Serienummer": "TW196",
+                "Serienummers": "TW192\nTW193\nTW194\nTW195\nTW196"
+            },
+            "Ordernummer": "",
+            "Datum": "21-07-2025",
+            "Naam medewerker": "",
+            "Instellingen OK": false,
+            "Checklist OK": {
+                "Juiste nulspanplaat gebruikt": false,
+                "Graveermachine correct ingesteld": false,
+                "Juiste submodules geplaatst": false,
+                "divers geplaatst": false
+            }
+        }
+    },
+    {
+        "product": "Diver",
+        "tijd": "2025-07-21T08:31:42.626177",
+        "data": {
+            "Productielijn": "Diver",
+            "Type": "DI801",
+            "Aantal": "5",
+            "Productie modus": {
+                "Modus": "Series",
+                "Start Serienummer": "TW196",
+                "Eind Serienummer": "TW200",
+                "Serienummers": "TW196\nTW197\nTW198\nTW199\nTW200"
+            },
+            "Ordernummer": "",
+            "Datum": "21-07-2025",
+            "Naam medewerker": ""
+        }
+    },
+    {
+        "product": "Diver",
+        "tijd": "2025-07-21T08:31:47.575167",
+        "data": {
+            "Productielijn": "Diver",
+            "Type": "DI801",
+            "Aantal": "5",
+            "Productie modus": {
+                "Modus": "Series",
+                "Start Serienummer": "TW196",
+                "Eind Serienummer": "TW200",
+                "Serienummers": "TW196\nTW197\nTW198\nTW199\nTW200"
+            },
+            "Ordernummer": "",
+            "Datum": "21-07-2025",
+            "Naam medewerker": "",
+            "Instellingen OK": false,
+            "Checklist OK": {
+                "Juiste nulspanplaat gebruikt": false,
+                "Graveermachine correct ingesteld": false,
+                "Juiste submodules geplaatst": false,
+                "divers geplaatst": false
+            }
+        }
+    },
+    {
+        "product": "Diver",
+        "tijd": "2025-07-21T08:33:15.816798",
+        "data": {
+            "Productielijn": "Diver",
+            "Type": "DI801",
+            "Aantal": "5",
+            "Productie modus": {
+                "Modus": "Series",
+                "Start Serienummer": "TW200",
+                "Eind Serienummer": "TW204",
+                "Serienummers": "TW200\nTW201\nTW202\nTW203\nTW204"
+            },
+            "Ordernummer": "",
+            "Datum": "21-07-2025",
+            "Naam medewerker": ""
+        }
+    },
+    {
+        "product": "Diver",
+        "tijd": "2025-07-21T08:33:23.019912",
+        "data": {
+            "Productielijn": "Diver",
+            "Type": "DI801",
+            "Aantal": "5",
+            "Productie modus": {
+                "Modus": "Series",
+                "Start Serienummer": "TW200",
+                "Eind Serienummer": "TW204",
+                "Serienummers": "TW200\nTW201\nTW202\nTW203\nTW204"
+            },
+            "Ordernummer": "",
+            "Datum": "21-07-2025",
+            "Naam medewerker": "",
+            "Instellingen OK": false,
+            "Checklist OK": {
+                "Juiste nulspanplaat gebruikt": false,
+                "Graveermachine correct ingesteld": false,
+                "Juiste submodules geplaatst": false,
+                "divers geplaatst": false
+            }
+        }
     }
 ]

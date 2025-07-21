@@ -715,7 +715,9 @@ class App(ctk.CTk):
             return False
         return True
 
-    def update_step_status_for_serial(self, serial, step_name, status):
+    def update_step_status_for_serial(self, serial, step_name, status, data):
+        if data != serial and step_name == 'Graveren':
+            status = False
         if status is True:
             kleur = "green"
             symbool = "✔"
@@ -727,6 +729,13 @@ class App(ctk.CTk):
             symbool = "◯"
 
         if serial in self.step_labels and step_name in self.step_labels[serial]:
+            print("serial")
+            print(serial)
+            print(f"barcode{data}")
+            if step_name == "Graveren" and data:
+            # Bij graveren, toon de barcode data
+                symbool = f"{symbool} {data}"
+
             label = self.step_labels[serial][step_name]
             label.configure(text=symbool, fg_color=kleur)
             self.update_progressbar()
@@ -742,15 +751,18 @@ class App(ctk.CTk):
 
             if "ARDUINO_Persen_OK" in msg:
                 _, serial = msg.strip().split(":")
-                self.update_step_status_for_serial(serial.strip(), "Persen", True)
+                self.update_step_status_for_serial(serial.strip(), "Persen", True, _)
 
             if "ARDUINO_Programmeren_OK" in msg:
                 _, serial = msg.strip().split(":")
+
                 self.update_step_status_for_serial(serial.strip(), "Programmeren", True)
 
             if "ARDUINO_Graveren_OK" in msg:
                 _, serial = msg.strip().split(":")
-                self.update_step_status_for_serial(serial.strip(), "Graveren", True)
+                data = read_barcode(device_ports["barcodescanner"])
+
+                self.update_step_status_for_serial(serial.strip(), "Graveren", True, data)
 
             if "ARDUINO_Controle" in msg:
                 _, serial = msg.strip().split(":")

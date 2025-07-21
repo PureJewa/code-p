@@ -5,6 +5,7 @@ from logic.config import *
 from logic.validation.general import *
 from logic.JsonHandler import  *
 from logic.config import PRODUCT_CONFIG, DIVER, CTD, SERIE, ENKEL
+
 # from arduinoComm import *
 def read_barcode(port, baudrate=9600, timeout=2):
     """Lees de barcode van de opgegeven seriële poort."""
@@ -229,6 +230,7 @@ def Barcode_to_raspberry():
         print(f"Fout bij {ScannerPort}: {e}")
 
 def bevestig(app):
+    from arduinoComm import send_command
     instellingen_ok = app.instellingen_ok.get()
     checklist_waarden = {k: v.get() for k, v in app.checklist_vars.items()}
     send_command(f'PRODUCT:{app.product_menu.get()}')
