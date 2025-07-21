@@ -5,7 +5,34 @@ from logic.config import *
 from logic.validation.general import *
 from logic.JsonHandler import  *
 from logic.config import PRODUCT_CONFIG, DIVER, CTD, SERIE, ENKEL
-from arduinoComm import *
+# from arduinoComm import *
+def read_barcode(port, baudrate=9600, timeout=2):
+    """Lees de barcode van de opgegeven seriële poort."""
+    try:
+        with serial.Serial(port, baudrate, timeout=timeout) as ser:
+            print(f"Verbonden met {port}. Wachten op barcode...")
+            while True:
+                # Lees de barcode en verwijder ongewenste witruimtes
+                data = ser.readline().decode('utf-8').strip()
+                if data:
+                    print(f"Barcode gescand: {data}")
+                    return data
+                else:
+                    print("Wachten op barcode...")
+    except serial.SerialException as e:
+        print(f"Fout bij het openen van de seriële poort: {e}")
+        return None
+    except Exception as e:
+        print(f"Onverwachte fout: {e}")
+        return None
+def find_all_devices():
+    found_devices = {}
+    ports = serial.tools.list_ports.comports()
+    for name, info in DEVICES.items():
+        match = next((p.device for p in ports if p.vid == info["vid"] and p.pid == info["pid"]), None)
+        found_devices[name] = match
+    return found_devices
+
 def make_line(app):
     ctk.CTkFrame(app.main_frame, height=2, width=app.screen_width, fg_color="gray").pack(pady=1)
 

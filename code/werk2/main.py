@@ -6,10 +6,9 @@ from logic.config import *
 from logic.JsonHandler import *
 from logic.validation.general import *
 from helperfunctions import *
-from logic.config import PRODUCT_CONFIG, LOGO_IMAGE, OFF_IMAGE
-from helperfunctions import reset_app
+from logic.config import PRODUCT_CONFIG, LOGO_IMAGE, OFF_IMAGE, DEVICES, device_ports
+from helperfunctions import *
 from arduinoComm import *
-
 
 
 class App(ctk.CTk):
@@ -39,12 +38,29 @@ class App(ctk.CTk):
 
         #Standaard scherm inladen
         self.create_base_layout()
+        # Check welke apparaten missen
+        for device_name, port in device_ports.items():
+            if port is None:
+                self.warningNoDevice(device_name)
 
         #Eerste scherm laden
         switch_screen(self, "Instellingen")
 
         #Laad een gewenst scherm is voor testen
         # switch_screen(self, "Besturing")
+
+    def warningNoDevice(self, device):
+        warning_window = ctk.CTkToplevel(self)
+        warning_window.title("Geen apparaat gevonden")
+        warning_window.geometry("300x150")
+        warning_window.resizable(False, False)
+        warning_window.attributes('-topmost', True)
+
+        label = ctk.CTkLabel(warning_window, text=f"Er is geen {device} gevonden.", font=("Arial", 14))
+        label.pack(pady=20)
+        sluitknop = ctk.CTkButton(warning_window, text="OK", command=warning_window.destroy)
+        sluitknop.pack(pady=10)
+
     def create_base_layout(self):
         #Maak boven frame
         self.topbar = ctk.CTkFrame(self, height=50)
@@ -207,6 +223,22 @@ class App(ctk.CTk):
         self.person_button = ctk.CTkButton(self.main_frame, text="Check Naam", state="disabled", command= lambda: checkPerson(self), font=self.font)
         self.person_button.pack(pady=2)
 
+    def show_device_status(self, device_ports, control_frame):
+        for device_name, port in device_ports.items():
+            # Maak een frame voor het apparaat + statuslampje
+            device_frame = ctk.CTkFrame(control_frame, fg_color="transparent")
+            device_frame.pack(pady=5, fill="x")
+
+            # Zet een statuslampje met tekst
+            status_color = "green" if port else "red"
+            status_text = "🟢 Verbonden" if port else "🔴 Niet gevonden"
+            # Apparaatnaam + poort
+            device_label = ctk.CTkLabel(device_frame, text=f"{device_name}:", font=self.font)
+            device_label.pack(side="left", padx=(0, 10))
+
+            # Statuslampje label
+            status_label = ctk.CTkLabel(device_frame, text=status_text, font=self.font, text_color=status_color)
+            status_label.pack(side="left")
 
     def load_controle_screen(self):
         checklist_items = []
@@ -243,10 +275,12 @@ class App(ctk.CTk):
                 if serial.strip():
                     ctk.CTkLabel(right_frame, text=serial.strip(), font=self.font).pack(anchor="e", pady=2)
 
+
         # Frame voor de switches en bevestigingsknop
         control_frame = ctk.CTkFrame(self.main_frame)
         control_frame.pack(fill="x", pady=10)
 
+        self.show_device_status(device_ports, control_frame)
         # Switch: Kloppen de instellingen?
         self.instellingen_ok = ctk.BooleanVar(value=False)
 
@@ -291,6 +325,16 @@ class App(ctk.CTk):
 
             switch = ctk.CTkSwitch(checklist_frame, text="", variable=var)
             switch.grid(row=i, column=1, sticky="e", padx=10, pady=5)
+
+        if device_ports.get("barcodescanner") is None:
+            # Als de barcodescanner niet gevonden is, toon een waarschuwing
+            warning_label = ctk.CTkLabel(control_frame, text="⚠️ Barcodescanner niet gevonden!", font=self.font, text_color="red")
+            warning_label.pack(pady=5)
+
+        if device_ports.get("arduino Due") is None:
+            # Als de Arduino Due niet gevonden is, toon een waarschuwing
+            warning_label = ctk.CTkLabel(control_frame, text="⚠️ Arduino Due niet gevonden!", font=self.font, text_color="red")
+            warning_label.pack(pady=5)
 
         # Bevestigknop
         bevestig_button = ctk.CTkButton(control_frame, text="Bevestigen", command=lambda: bevestig(self), font=self.font)
@@ -708,10 +752,10 @@ class App(ctk.CTk):
                 _, serial = msg.strip().split(":")
                 self.update_step_status_for_serial(serial.strip(), "Graveren", True)
 
-            if "ARDUINO_Controle_OK" in msg:
+            if "ARDUINO_Controle" in msg:
                 _, serial = msg.strip().split(":")
                 self.update_step_status_for_serial(serial.strip(), "Controle", True)
-                Barcode_to_raspberry()
+                read_barcode(device_ports["barcodescanner"])
             if "ARDUINO_Verpakken_OK" in msg:
                 _, serial = msg.strip().split(":")
                 self.update_step_status_for_serial(serial.strip(), "Verpakken", True)

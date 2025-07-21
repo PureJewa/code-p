@@ -2,36 +2,29 @@
     "Diver": {
         "Productielijn": "Diver",
         "Type": "DI801",
-        "Aantal": "56",
+        "Aantal": "5",
         "Productie modus": {
             "Modus": "Series",
-            "Start Serienummer": "TW073",
-            "Eind Serienummer": "TW128",
-            "Serienummers": "TW073\nTW074\nTW075\nTW076\nTW077\nTW078\nTW079\nTW080\nTW081\nTW082\nTW083\nTW084\nTW085\nTW086\nTW087\nTW088\nTW089\nTW090\nTW091\nTW092\nTW093\nTW094\nTW095\nTW096\nTW097\nTW098\nTW099\nTW100\nTW101\nTW102\nTW103\nTW104\nTW105\nTW106\nTW107\nTW108\nTW109\nTW110\nTW111\nTW112\nTW113\nTW114\nTW115\nTW116\nTW117\nTW118\nTW119\nTW120\nTW121\nTW122\nTW123\nTW124\nTW125\nTW126\nTW127\nTW128"
+            "Start Serienummer": "TW156",
+            "Eind Serienummer": "TW160",
+            "Serienummers": "TW156\nTW157\nTW158\nTW159\nTW160"
         },
         "Ordernummer": "",
-        "Datum": "17-07-2025",
-        "Naam medewerker": "",
-        "Instellingen OK": false,
-        "Checklist OK": {
-            "Juiste nulspanplaat gebruikt": false,
-            "Graveermachine correct ingesteld": false,
-            "Juiste submodules geplaatst": false,
-            "divers geplaatst": false
-        }
+        "Datum": "18-07-2025",
+        "Naam medewerker": ""
     },
     "CTD": {
         "Productielijn": "CTD",
         "Type": "DI281",
-        "Aantal": "15",
+        "Aantal": "5",
         "Productie modus": {
             "Modus": "Series",
-            "Start Serienummer": "N0117",
-            "Eind Serienummer": "N0131",
-            "Serienummers": "N0117\nN0118\nN0119\nN0120\nN0121\nN0122\nN0123\nN0124\nN0125\nN0126\nN0127\nN0128\nN0129\nN0130\nN0131"
+            "Start Serienummer": "N0139",
+            "Eind Serienummer": "N0143",
+            "Serienummers": "N0139\nN0140\nN0141\nN0142\nN0143"
         },
         "Ordernummer": "",
-        "Datum": "16-07-2025",
+        "Datum": "18-07-2025",
         "Naam medewerker": "",
         "Instellingen OK": false,
         "Checklist OK": {

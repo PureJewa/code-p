@@ -1,4 +1,5 @@
 from imports import *
+
 BESTAND_INSTELLINGEN = "data/instellingen.json"
 BESTAND_GESCHIEDENIS = "data/geschiedenis.json"
 
@@ -59,3 +60,20 @@ PRODUCT_CONFIG = {
         'max_amount': 100,
     }
 }
+DEVICES = {
+    "barcodescanner": {"vid": 0x0483, "pid": 0x5740},
+    "arduino Due": {"vid": 0x2a03, "pid": 0x003d},
+
+}
+
+def init_device():
+    from helperfunctions import find_all_devices
+    device_ports = find_all_devices()
+
+    for device, port in device_ports.items():
+        if port:
+            print(f"{device} zit op: {port}")
+        else:
+            print(f"{device} niet gevonden")
+    return device_ports
+device_ports = init_device()

@@ -2,8 +2,9 @@ import serial
 import threading
 import queue
 import time
+from logic.config import device_ports
 
-COM_PORT = 'COM7'
+COM_PORT = device_ports.get("arduino Due")
 BAUD_RATE = 9600
 
 message_queue = queue.Queue()

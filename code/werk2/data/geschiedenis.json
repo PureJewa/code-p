@@ -7098,5 +7098,278 @@
                 "divers geplaatst": false
             }
         }
+    },
+    {
+        "product": "Diver",
+        "tijd": "2025-07-18T15:09:25.102382",
+        "data": {
+            "Productielijn": "Diver",
+            "Type": "DI801",
+            "Aantal": "5",
+            "Productie modus": {
+                "Modus": "Series",
+                "Start Serienummer": "TW128",
+                "Eind Serienummer": "TW132",
+                "Serienummers": "TW128\nTW129\nTW130\nTW131\nTW132"
+            },
+            "Ordernummer": "",
+            "Datum": "18-07-2025",
+            "Naam medewerker": ""
+        }
+    },
+    {
+        "product": "Diver",
+        "tijd": "2025-07-18T15:09:47.884461",
+        "data": {
+            "Productielijn": "Diver",
+            "Type": "DI801",
+            "Aantal": "5",
+            "Productie modus": {
+                "Modus": "Series",
+                "Start Serienummer": "TW132",
+                "Eind Serienummer": "TW136",
+                "Serienummers": "TW132\nTW133\nTW134\nTW135\nTW136"
+            },
+            "Ordernummer": "",
+            "Datum": "18-07-2025",
+            "Naam medewerker": ""
+        }
+    },
+    {
+        "product": "Diver",
+        "tijd": "2025-07-18T15:13:37.925176",
+        "data": {
+            "Productielijn": "Diver",
+            "Type": "DI801",
+            "Aantal": "5",
+            "Productie modus": {
+                "Modus": "Series",
+                "Start Serienummer": "TW136",
+                "Eind Serienummer": "TW140",
+                "Serienummers": "TW136\nTW137\nTW138\nTW139\nTW140"
+            },
+            "Ordernummer": "",
+            "Datum": "18-07-2025",
+            "Naam medewerker": ""
+        }
+    },
+    {
+        "product": "Diver",
+        "tijd": "2025-07-18T15:13:57.030586",
+        "data": {
+            "Productielijn": "Diver",
+            "Type": "DI801",
+            "Aantal": "5",
+            "Productie modus": {
+                "Modus": "Series",
+                "Start Serienummer": "TW140",
+                "Eind Serienummer": "TW144",
+                "Serienummers": "TW140\nTW141\nTW142\nTW143\nTW144"
+            },
+            "Ordernummer": "",
+            "Datum": "18-07-2025",
+            "Naam medewerker": ""
+        }
+    },
+    {
+        "product": "Diver",
+        "tijd": "2025-07-18T15:14:40.168293",
+        "data": {
+            "Productielijn": "Diver",
+            "Type": "DI801",
+            "Aantal": "5",
+            "Productie modus": {
+                "Modus": "Series",
+                "Start Serienummer": "TW144",
+                "Eind Serienummer": "TW148",
+                "Serienummers": "TW144\nTW145\nTW146\nTW147\nTW148"
+            },
+            "Ordernummer": "",
+            "Datum": "18-07-2025",
+            "Naam medewerker": ""
+        }
+    },
+    {
+        "product": "Diver",
+        "tijd": "2025-07-18T15:15:19.528327",
+        "data": {
+            "Productielijn": "Diver",
+            "Type": "DI801",
+            "Aantal": "5",
+            "Productie modus": {
+                "Modus": "Series",
+                "Start Serienummer": "TW148",
+                "Eind Serienummer": "TW152",
+                "Serienummers": "TW148\nTW149\nTW150\nTW151\nTW152"
+            },
+            "Ordernummer": "",
+            "Datum": "18-07-2025",
+            "Naam medewerker": ""
+        }
+    },
+    {
+        "product": "Diver",
+        "tijd": "2025-07-18T15:21:59.948155",
+        "data": {
+            "Productielijn": "Diver",
+            "Type": "DI801",
+            "Aantal": "5",
+            "Productie modus": {
+                "Modus": "Series",
+                "Start Serienummer": "TW152",
+                "Eind Serienummer": "TW156",
+                "Serienummers": "TW152\nTW153\nTW154\nTW155\nTW156"
+            },
+            "Ordernummer": "",
+            "Datum": "18-07-2025",
+            "Naam medewerker": ""
+        }
+    },
+    {
+        "product": "Diver",
+        "tijd": "2025-07-18T15:23:16.414077",
+        "data": {
+            "Productielijn": "Diver",
+            "Type": "DI801",
+            "Aantal": "5",
+            "Productie modus": {
+                "Modus": "Series",
+                "Start Serienummer": "TW156",
+                "Eind Serienummer": "TW160",
+                "Serienummers": "TW156\nTW157\nTW158\nTW159\nTW160"
+            },
+            "Ordernummer": "",
+            "Datum": "18-07-2025",
+            "Naam medewerker": ""
+        }
+    },
+    {
+        "product": "CTD",
+        "tijd": "2025-07-18T15:40:03.113035",
+        "data": {
+            "Productielijn": "CTD",
+            "Type": "DI281",
+            "Aantal": "5",
+            "Productie modus": {
+                "Modus": "Series",
+                "Start Serienummer": "N0131",
+                "Eind Serienummer": "N0135",
+                "Serienummers": "N0131\nN0132\nN0133\nN0134\nN0135"
+            },
+            "Ordernummer": "",
+            "Datum": "18-07-2025",
+            "Naam medewerker": ""
+        }
+    },
+    {
+        "product": "CTD",
+        "tijd": "2025-07-18T15:40:06.140507",
+        "data": {
+            "Productielijn": "CTD",
+            "Type": "DI281",
+            "Aantal": "5",
+            "Productie modus": {
+                "Modus": "Series",
+                "Start Serienummer": "N0131",
+                "Eind Serienummer": "N0135",
+                "Serienummers": "N0131\nN0132\nN0133\nN0134\nN0135"
+            },
+            "Ordernummer": "",
+            "Datum": "18-07-2025",
+            "Naam medewerker": "",
+            "Instellingen OK": false,
+            "Checklist OK": {
+                "Juiste nulspanplaat gebruikt": false,
+                "Graveermachine correct ingesteld": false,
+                "Juiste submodules geplaatst": false,
+                "ctd's geplaatst": false
+            }
+        }
+    },
+    {
+        "product": "CTD",
+        "tijd": "2025-07-18T15:41:50.551355",
+        "data": {
+            "Productielijn": "CTD",
+            "Type": "DI281",
+            "Aantal": "5",
+            "Productie modus": {
+                "Modus": "Series",
+                "Start Serienummer": "N0135",
+                "Eind Serienummer": "N0139",
+                "Serienummers": "N0135\nN0136\nN0137\nN0138\nN0139"
+            },
+            "Ordernummer": "",
+            "Datum": "18-07-2025",
+            "Naam medewerker": ""
+        }
+    },
+    {
+        "product": "CTD",
+        "tijd": "2025-07-18T15:41:52.403372",
+        "data": {
+            "Productielijn": "CTD",
+            "Type": "DI281",
+            "Aantal": "5",
+            "Productie modus": {
+                "Modus": "Series",
+                "Start Serienummer": "N0135",
+                "Eind Serienummer": "N0139",
+                "Serienummers": "N0135\nN0136\nN0137\nN0138\nN0139"
+            },
+            "Ordernummer": "",
+            "Datum": "18-07-2025",
+            "Naam medewerker": "",
+            "Instellingen OK": false,
+            "Checklist OK": {
+                "Juiste nulspanplaat gebruikt": false,
+                "Graveermachine correct ingesteld": false,
+                "Juiste submodules geplaatst": false,
+                "ctd's geplaatst": false
+            }
+        }
+    },
+    {
+        "product": "CTD",
+        "tijd": "2025-07-18T15:46:41.727499",
+        "data": {
+            "Productielijn": "CTD",
+            "Type": "DI281",
+            "Aantal": "5",
+            "Productie modus": {
+                "Modus": "Series",
+                "Start Serienummer": "N0139",
+                "Eind Serienummer": "N0143",
+                "Serienummers": "N0139\nN0140\nN0141\nN0142\nN0143"
+            },
+            "Ordernummer": "",
+            "Datum": "18-07-2025",
+            "Naam medewerker": ""
+        }
+    },
+    {
+        "product": "CTD",
+        "tijd": "2025-07-18T15:46:43.580798",
+        "data": {
+            "Productielijn": "CTD",
+            "Type": "DI281",
+            "Aantal": "5",
+            "Productie modus": {
+                "Modus": "Series",
+                "Start Serienummer": "N0139",
+                "Eind Serienummer": "N0143",
+                "Serienummers": "N0139\nN0140\nN0141\nN0142\nN0143"
+            },
+            "Ordernummer": "",
+            "Datum": "18-07-2025",
+            "Naam medewerker": "",
+            "Instellingen OK": false,
+            "Checklist OK": {
+                "Juiste nulspanplaat gebruikt": false,
+                "Graveermachine correct ingesteld": false,
+                "Juiste submodules geplaatst": false,
+                "ctd's geplaatst": false
+            }
+        }
     }
 ]
