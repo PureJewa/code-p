@@ -1,5 +1,5 @@
 from imports import *
-
+timeout = 2
 BESTAND_INSTELLINGEN = "data/instellingen.json"
 BESTAND_GESCHIEDENIS = "data/geschiedenis.json"
 
@@ -63,6 +63,7 @@ PRODUCT_CONFIG = {
 DEVICES = {
     "barcodescanner": {"vid": 0x0483, "pid": 0x5740},
     "arduino Due": {"vid": 0x2a03, "pid": 0x003d},
+    "programeerUnit": {"vid": 0x2047 , "pid": 0x0ab9},
 
 }
 
@@ -77,3 +78,8 @@ def init_device():
             print(f"{device} niet gevonden")
     return device_ports
 device_ports = init_device()
+
+# Commandos voor Diver USB reading unit
+COMMAND_SERIAL = b'\x01\x4E\x32\x34\x02\x03\xBA\xA0'
+COMMAND_PRESSURE = b'\x01\x47\x32\x38\x02\x03\xB7\xA0'
+COMMAND_PUSHSERIE = b'\x01\x46\x32\x34\x02\x2E\x2E\x30\x30\x2D\x46\x4E\x30\x38\x36\x20\x20\x32\x31\x39\x2E\x47\x65\x31\x30\x38\x39\x31\x31\x35\x36\x55\x54\x43\x2B\x31\x20\x20\x20\x20\x20\x03\x80D\xA0'

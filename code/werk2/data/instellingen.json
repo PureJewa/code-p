@@ -5,12 +5,12 @@
         "Aantal": "5",
         "Productie modus": {
             "Modus": "Series",
-            "Start Serienummer": "TW200",
-            "Eind Serienummer": "TW204",
-            "Serienummers": "TW200\nTW201\nTW202\nTW203\nTW204"
+            "Start Serienummer": "TW380",
+            "Eind Serienummer": "TW384",
+            "Serienummers": "TW380\nTW381\nTW382\nTW383\nTW384"
         },
         "Ordernummer": "",
-        "Datum": "21-07-2025",
+        "Datum": "22-07-2025",
         "Naam medewerker": "",
         "Instellingen OK": false,
         "Checklist OK": {

@@ -63,7 +63,7 @@ def serial_read_loop():
 
     if not is_booted:
         message_queue.put("❌ Boot handshake mislukt na meerdere pogingen. Start programma opnieuw.")
-        stop_threads.set()  # Stop verdere communicatie als boot mislukt
+        stop_event.set()  # Stop verdere communicatie als boot mislukt
 
     # Hoofd seriële leesloop
     while not stop_event.is_set():

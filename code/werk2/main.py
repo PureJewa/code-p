@@ -716,7 +716,9 @@ class App(ctk.CTk):
         return True
 
     def update_step_status_for_serial(self, serial, step_name, status, data):
-        if data != serial and step_name == 'Graveren':
+        if data != serial and step_name == 'Controle':
+            status = False
+        if data != serial and step_name == 'Programmeren':
             status = False
         if status is True:
             kleur = "green"
@@ -729,17 +731,18 @@ class App(ctk.CTk):
             symbool = "◯"
 
         if serial in self.step_labels and step_name in self.step_labels[serial]:
-            print("serial")
-            print(serial)
-            print(f"barcode{data}")
-            if step_name == "Graveren" and data:
-            # Bij graveren, toon de barcode data
+
+            if step_name == "Controle" and data:
                 symbool = f"{symbool} {data}"
+
+            if step_name == "Programmeren" and data:
+                symbool = f"{symbool} {data}"
+
 
             label = self.step_labels[serial][step_name]
             label.configure(text=symbool, fg_color=kleur)
             self.update_progressbar()
-            # 👉 Check of alle stappen nu klaar zijn
+            # Check of alle stappen klaar zijn
             if self.serial_is_done(serial):
                 print(f"✅ {serial} is volledig verwerkt.")
                 self.after(500, self.send_next_serial_to_arduino)
@@ -749,26 +752,29 @@ class App(ctk.CTk):
             msg = message_queue.get()
             print(f"[Arduino]: {msg}")  # Voor debug
 
-            if "ARDUINO_Persen_OK" in msg:
+            if "ARDUINO_Persen:" in msg:
                 _, serial = msg.strip().split(":")
                 self.update_step_status_for_serial(serial.strip(), "Persen", True, _)
 
-            if "ARDUINO_Programmeren_OK" in msg:
+            if "ARDUINO_Programmeren:" in msg:
+                _, serial = msg.strip().split(":")
+                Prog_Diver(serial, device_ports["programeerUnit"])
+                serial_data, temp_data, pres_data = Diver_Read_Unit_to_raspberry(device_ports["programeerUnit"])
+                self.update_step_status_for_serial(serial.strip(), "Programmeren", True, serial_data)
+
+            if "ARDUINO_Graveren:" in msg:
+                _, serial = msg.strip().split(":")
+                # data = read_barcode(device_ports["barcodescanner"])
+                self.update_step_status_for_serial(serial.strip(), "Graveren", True, _)
+
+            if "ARDUINO_Controle:" in msg:
                 _, serial = msg.strip().split(":")
 
-                self.update_step_status_for_serial(serial.strip(), "Programmeren", True,_)
-
-            if "ARDUINO_Graveren_OK" in msg:
-                _, serial = msg.strip().split(":")
                 data = read_barcode(device_ports["barcodescanner"])
 
-                self.update_step_status_for_serial(serial.strip(), "Graveren", True, data)
+                self.update_step_status_for_serial(serial.strip(), "Controle", True, data)
 
-            if "ARDUINO_Controle" in msg:
-                _, serial = msg.strip().split(":")
-                self.update_step_status_for_serial(serial.strip(), "Controle", True,_)
-                read_barcode(device_ports["barcodescanner"])
-            if "ARDUINO_Verpakken_OK" in msg:
+            if "ARDUINO_Verpakken:" in msg:
                 _, serial = msg.strip().split(":")
                 self.update_step_status_for_serial(serial.strip(), "Verpakken", True,_)
 
@@ -785,7 +791,7 @@ class App(ctk.CTk):
         if serial not in self.step_labels:
             return True  # Onbekend serial? overslaan
         for label in self.step_labels[serial].values():
-            if label.cget("text") != "✔":
+            if label.cget("text") == "◯":
                 return False
         return True
 
