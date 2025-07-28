@@ -25,6 +25,7 @@ class App(ctk.CTk):
 
         #Variable instellen
         self.instellingen_data = {}
+        self.status_widgets = {}
         self.selected_product = None
         self.is_set = False
         self.amount_done = 0
@@ -296,23 +297,10 @@ class App(ctk.CTk):
             font=self.font
         )
         self.instellingen_switch.pack(side="left")
-
+        checklist_items = PRODUCT_CONFIG[self.selected_product].get('check_list_items', [])
         # Switches voor fysieke checklist
         self.checklist_vars = {}
-        if self.selected_product == DIVER:
-            checklist_items = [
-                "Juiste nulspanplaat gebruikt",
-                "Graveermachine correct ingesteld",
-                "Juiste submodules geplaatst",
-                "divers geplaatst"
-            ]
-        if self.selected_product == CTD:
-            checklist_items = [
-                "Juiste nulspanplaat gebruikt",
-                "Graveermachine correct ingesteld",
-                "Juiste submodules geplaatst",
-                "ctd's geplaatst"
-            ]
+
         checklist_frame = ctk.CTkFrame(control_frame)
         checklist_frame.pack(pady=10, padx=20, fill="x")
 
@@ -361,7 +349,7 @@ class App(ctk.CTk):
                                                                                                       padx=5)
         ctk.CTkButton(knop_frame, text="⏹ Stop", font=self.font, command=self.stop_production).pack(side="left", padx=5)
 
-        self.progress_label = ctk.CTkLabel(controls_frame, text="Voortgang", font=self.font)
+        self.progress_label = ctk.CTkLabel(controls_frame, text=f"Voortgang: 0/{self.amount_entry.get()}", font=self.font)
         self.progress_label.pack(pady=1)
 
         progress_width = int(self.screen_width * 0.25) + (self.font_size * 15)
@@ -370,6 +358,13 @@ class App(ctk.CTk):
         self.progressbar.pack(pady=15)
         self.progressbar.set(0)
 
+        self.apparaat_status_label = ctk.CTkLabel(controls_frame, text="Apparaat status:", font=self.font)
+        self.apparaat_status_label.pack(pady=2)
+
+        self.apparaat_status_frame = ctk.CTkFrame(self.main_frame)
+        self.apparaat_status_frame.pack(fill="both", expand=True, padx=10, pady=(0, 10))
+
+        self.update_device()
         self.productie_overzicht_label = ctk.CTkLabel(controls_frame, text="Productie Overzicht", font=self.font)
 
         # Bevat header én scrollable data
@@ -391,6 +386,31 @@ class App(ctk.CTk):
         # Opbouwen
         self.create_production_steps_header()
         self.create_production_steps_rows()
+
+    def update_device(self):
+        device_ports = init_device()  # haalt de actuele verbindingen op
+
+        for i, (device_name, port) in enumerate(device_ports.items()):
+            status_color = "green" if port else "red"
+            status_text = "🟢 Verbonden" if port else "🔴 Niet gevonden"
+
+            if device_name not in self.status_widgets:
+                # Maak label voor apparaatnaam
+                name_label = ctk.CTkLabel(self.apparaat_status_frame, text=f"{device_name}:", font=self.font)
+                name_label.grid(row=0, column=i, padx=(0, 10), pady=5, sticky="w")
+
+                # Maak label voor status
+                status_label = ctk.CTkLabel(self.apparaat_status_frame, text=status_text, font=self.font,
+                                            text_color=status_color)
+                status_label.grid(row=1, column=i, padx=(0, 10), pady=5, sticky="w")
+
+                self.status_widgets[device_name] = status_label
+            else:
+                # Alleen status bijwerken
+                self.status_widgets[device_name].configure(text=status_text, text_color=status_color)
+
+        # Plan volgende update over 1 seconden
+        self.after(1000, self.update_device)
 
     def create_production_steps_header(self):
         steps = PRODUCT_CONFIG[self.selected_product].get("productie_stappen", [])
@@ -555,7 +575,7 @@ class App(ctk.CTk):
         print("Reset fout")
     def select_product(self, product):
         if product:
-            for widget in app.scrollable_frame.winfo_children():
+            for widget in self.scrollable_frame.winfo_children():
                 widget.forget()
             self.load_settings_screen()
         self.selected_product = product

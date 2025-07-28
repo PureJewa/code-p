@@ -33,6 +33,11 @@ PRODUCT_CONFIG = {
         "types": ["DI801", "DI802", "DI803"],
         "max_amount": 500,
         'serial_pattern': "LLDDD",  # Letter, Letter, Diggit, Digit, Digit
+        'check_list_items' : [
+            "Juiste nulspanplaat gebruikt",
+            "Graveermachine correct ingesteld",
+            "Juiste submodules geplaatst",
+            "divers geplaatst"],
         'productie_stappen' :[
             'Persen',
             'Programmeren',
@@ -58,7 +63,8 @@ PRODUCT_CONFIG = {
     "RDE-tips" : {
         "types" : ["Carbon", "Goud", "Silver", "Platina"],
         'max_amount': 100,
-    }
+    },
+
 }
 DEVICES = {
     "barcodescanner": {"vid": 0x0483, "pid": 0x5740},
@@ -70,12 +76,6 @@ DEVICES = {
 def init_device():
     from helperfunctions import find_all_devices
     device_ports = find_all_devices()
-
-    for device, port in device_ports.items():
-        if port:
-            print(f"{device} zit op: {port}")
-        else:
-            print(f"{device} niet gevonden")
     return device_ports
 device_ports = init_device()
 

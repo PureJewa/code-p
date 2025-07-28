@@ -393,10 +393,4 @@ def Diver_Read_Unit_to_raspberry(ReadingUnitPort, baudrate=9600):
 def init_device():
     from helperfunctions import find_all_devices
     device_ports = find_all_devices()
-
-    for device, port in device_ports.items():
-        if port:
-            print(f"{device} zit op: {port}")
-        else:
-            print(f"{device} niet gevonden")
     return device_ports
