@@ -40,6 +40,7 @@ def serial_read_loop():
         if stop_event.is_set():
             return
         arduino.write(b"Python_Booted\n")
+
         message_queue.put("📤 Verzend: Python_Booted")
 
         start_time = time.time()

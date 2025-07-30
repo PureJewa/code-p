@@ -5,12 +5,12 @@
         "Aantal": "5",
         "Productie modus": {
             "Modus": "Series",
-            "Start Serienummer": "TW599",
-            "Eind Serienummer": "TW603",
-            "Serienummers": "TW599\nTW600\nTW601\nTW602\nTW603"
+            "Start Serienummer": "TW623",
+            "Eind Serienummer": "TW627",
+            "Serienummers": "TW623\nTW624\nTW625\nTW626\nTW627"
         },
         "Ordernummer": "",
-        "Datum": "28-07-2025",
+        "Datum": "29-07-2025",
         "Naam medewerker": "",
         "Instellingen OK": false,
         "Checklist OK": {

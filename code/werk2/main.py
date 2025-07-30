@@ -9,6 +9,7 @@ from helperfunctions import *
 from logic.config import PRODUCT_CONFIG, LOGO_IMAGE, OFF_IMAGE, DEVICES, device_ports
 from helperfunctions import *
 from arduinoComm import *
+from serial_simulator import SerialSimulatorWindow
 
 
 class App(ctk.CTk):
@@ -349,6 +350,9 @@ class App(ctk.CTk):
                                                                                                       padx=5)
         ctk.CTkButton(knop_frame, text="⏹ Stop", font=self.font, command=self.stop_production).pack(side="left", padx=5)
 
+        self.simulator_button = ctk.CTkButton(self, text="Simuleer Arduino", command=self.open_serial_simulator)
+        self.simulator_button.pack(pady=10)
+
         self.progress_label = ctk.CTkLabel(controls_frame, text=f"Voortgang: 0/{self.amount_entry.get()}", font=self.font)
         self.progress_label.pack(pady=1)
 
@@ -386,6 +390,40 @@ class App(ctk.CTk):
         # Opbouwen
         self.create_production_steps_header()
         self.create_production_steps_rows()
+
+    def open_serial_simulator(self):
+        def fake_arduino_response(input_text):
+            while not message_queue.empty():
+                msg = message_queue.get()
+                print(f"[Arduino]: {msg}")  # Voor debug
+
+                if "ARDUINO_Persen:" in msg:
+                    _, serial = msg.strip().split(":")
+                    self.update_step_status_for_serial(serial.strip(), "Persen", True, _)
+
+                if "ARDUINO_Programmeren:" in msg:
+                    _, serial = msg.strip().split(":")
+                    Prog_Diver(serial, device_ports["programeerUnit"])
+                    serial_data, temp_data, pres_data = Diver_Read_Unit_to_raspberry(device_ports["programeerUnit"])
+                    self.update_step_status_for_serial(serial.strip(), "Programmeren", True, serial_data)
+
+                if "ARDUINO_Graveren:" in msg:
+                    _, serial = msg.strip().split(":")
+                    # data = read_barcode(device_ports["barcodescanner"])
+                    self.update_step_status_for_serial(serial.strip(), "Graveren", True, _)
+
+                if "ARDUINO_Controle:" in msg:
+                    _, serial = msg.strip().split(":")
+
+                    data = read_barcode(device_ports["barcodescanner"])
+
+                    self.update_step_status_for_serial(serial.strip(), "Controle", True, data)
+
+                if "ARDUINO_Verpakken:" in msg:
+                    _, serial = msg.strip().split(":")
+                    self.update_step_status_for_serial(serial.strip(), "Verpakken", True, _)
+
+        SerialSimulatorWindow(self, on_send_callback=fake_arduino_response)
 
     def update_device(self):
         device_ports = init_device()  # haalt de actuele verbindingen op
@@ -494,67 +532,6 @@ class App(ctk.CTk):
                 )
                 label.grid(row=r, column=c, sticky="nsew", padx=5, pady=5)
                 self.step_labels[serial][step] = label
-
-    # def create_production_steps_overview(self, parent):
-    #
-    #     serials = generate_serials(self.serial_entry.get().upper(), int(self.amount_entry.get()),
-    #                                PRODUCT_CONFIG[self.selected_product]["serial_pattern"])
-    #     steps = PRODUCT_CONFIG[self.selected_product].get("productie_stappen", [])
-    #
-    #
-    #     productie_data = {}
-    #     if serials:
-    #         for serial in serials:
-    #             productie_data[serial] = {step: None for step in steps}
-    #
-    #     overzicht_frame = ctk.CTkFrame(parent)
-    #     overzicht_frame.grid(row=0, column=0, sticky="nsew", padx=20, pady=10)
-    #
-    #     # Belangrijk: laat overzicht_frame zichzelf uitrekken
-    #     parent.grid_rowconfigure(0, weight=1)
-    #     parent.grid_columnconfigure(0, weight=1)
-    #
-    #     for c in range(1, len(steps) + 1):
-    #         overzicht_frame.grid_columnconfigure(c, weight=1)
-    #
-    #     # Header
-    #     ctk.CTkLabel(overzicht_frame, text="Serienummer", font=self.font, anchor="w").grid(row=0, column=0, sticky="nsew",
-    #                                                                                        padx=5, pady=5)
-    #     for col, step in enumerate(steps, start=1):
-    #         ctk.CTkLabel(overzicht_frame, text=step, font=self.font, anchor="w").grid(row=0, column=col, sticky="nsew",
-    #                                                                                   padx=5, pady=5)
-    #
-    #     # Rijen
-    #     for r, (serial, status_dict) in enumerate(productie_data.items(), start=1):
-    #         ctk.CTkLabel(overzicht_frame, text=serial, font=self.font, anchor="w").grid(row=r, column=0, sticky="nsew",
-    #                                                                                     padx=5, pady=5)
-    #         for c, step in enumerate(steps, start=1):
-    #             status = status_dict.get(step, None)
-    #             if status is True:
-    #                 kleur = "green"
-    #                 symbool = "✔"
-    #             elif status is False:
-    #                 kleur = "red"
-    #                 symbool = "✘"
-    #             else:
-    #                 kleur = "blue"
-    #                 symbool = "◯"
-    #
-    #             label = ctk.CTkLabel(overzicht_frame, text=symbool, text_color="white", fg_color=kleur, width=30,
-    #                                  height=30, corner_radius=15)
-    #             label.grid(row=r, column=c, padx=10, pady=5)
-
-    def toets_gelezen(self, event):
-        """
-        Functie om toetsinvoer te verwerken. Dit is een placeholder voor echte logica.
-        Hier kan je toetsen afvangen en acties uitvoeren.
-        """
-        if event.char == "q":
-            self.error_textbox.configure(state="normal")
-            self.error_textbox.insert('end', "Test foutmelding.\n")
-            self.error_textbox.configure(state="disabled")
-            print("test")
-
 
     # Dummy methods voor knoppen
     def start_production(self):
