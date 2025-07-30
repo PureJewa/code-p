@@ -3,6 +3,8 @@
 #define knop3 39
 #define knop4 8
 #define knop5 29
+
+#define relay 39
 String input = "";
 String currentProduct = "";
 String currentSerial = "";
@@ -32,6 +34,9 @@ void setup() {
   pinMode(knop3, INPUT_PULLUP);
   pinMode(knop4, INPUT_PULLUP);
   pinMode(knop5, INPUT_PULLUP);
+
+  pinMode(relay, OUTPUT);
+  digitalWrite(relay, HIGH); // Relay off by default
   pinMode(LED_BUILTIN, OUTPUT);
   Serial.begin(9600);
 }
