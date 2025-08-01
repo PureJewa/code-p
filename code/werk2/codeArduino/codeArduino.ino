@@ -1,27 +1,38 @@
 #define knop1 53
 #define knop2 51
-#define knop3 39
+#define knop3 31
 #define knop4 8
 #define knop5 29
 
-#define relay 39
+#define relay 40
+#define relay1 38
+#define relay2 53
+
+#define noodstop 2
+
 String input = "";
 String currentProduct = "";
 String currentSerial = "";
 bool isBooted = false;
+volatile bool noodGeactiveerd = false;
 
 const unsigned long debounceDelay = 50;
-
+const unsigned long debounceDelay2 = 500;
 unsigned long lastDebounceTime_knop1 = 0;
 unsigned long lastDebounceTime_knop2 = 0;
 unsigned long lastDebounceTime_knop3 = 0;
 unsigned long lastDebounceTime_knop4 = 0;
 unsigned long lastDebounceTime_knop5 = 0;
+unsigned long lastDebounceTime_nood = 0;
+
 bool lastButtonState_knop1 = HIGH;
 bool lastButtonState_knop2 = HIGH;
 bool lastButtonState_knop3 = HIGH;
 bool lastButtonState_knop4 = HIGH;
 bool lastButtonState_knop5 = HIGH;
+
+
+bool lastButtonState_nood = HIGH;
 bool buttonState_knop1 = HIGH;
 bool buttonState_knop2 = HIGH;
 bool buttonState_knop3 = HIGH;
@@ -36,12 +47,33 @@ void setup() {
   pinMode(knop5, INPUT_PULLUP);
 
   pinMode(relay, OUTPUT);
-  digitalWrite(relay, HIGH); // Relay off by default
+  pinMode(relay1, OUTPUT);
+  pinMode(relay1, OUTPUT);
+
+
+  pinMode(noodstop, INPUT);
+  attachInterrupt(digitalPinToInterrupt(noodstop), nood, FALLING);
+//  digitalWrite(relay, HIGH); // Relay off by default
   pinMode(LED_BUILTIN, OUTPUT);
   Serial.begin(9600);
 }
 
+
+void nood(){
+    unsigned long huidigetijd = millis();
+
+
+  if ((huidigetijd - lastDebounceTime_nood) > debounceDelay2) {
+    lastDebounceTime_nood = huidigetijd;
+   noodGeactiveerd = true;
+}
+}
 void loop() {
+
+  if (noodGeactiveerd){
+    Serial.println("nood stop ingedrukt");
+     noodGeactiveerd = false;
+  }
   if (Serial.available()) {
     input = Serial.readStringUntil('\n');
     input.trim();
@@ -58,6 +90,23 @@ void loop() {
   }
 
   if (input.length() > 0) {
+
+    if (input == "on"){
+      digitalWrite(relay, HIGH);
+      digitalWrite(relay1,HIGH);
+      digitalWrite(relay2,HIGH);
+
+      Serial.println("Relay aan");
+      input = "";
+    }
+
+    if (input == "off"){
+      digitalWrite(relay, LOW);
+      digitalWrite(relay1, LOW);
+      digitalWrite(relay2, LOW);
+      Serial.println("Relay uit");
+      input = "";
+    }
     if (input.startsWith("PYTHON_SAYS:")) {
       String cmd = input.substring(12);
       if (cmd.startsWith("SERIAL:")) {
