@@ -85,7 +85,7 @@ class App(ctk.CTk):
         self.decrease_font_button = ctk.CTkButton(self.leftbar, text="-", command=lambda: decrease_font_size(self), width=50, height=30, font=("",15))
 
         self.off_image = ctk.CTkImage(light_image=OFF_IMAGE, dark_image=OFF_IMAGE, size=(50, 50))
-        self.off_button = ctk.CTkButton(self.rightbar, image=self.off_image, command=self.shutdown_pi, fg_color="transparent", text="", hover_color="gray20", width=50, height=50)
+        self.off_button = ctk.CTkButton(self.rightbar, image=self.off_image, command=self.ask_shutoff, fg_color="transparent", text="", hover_color="gray20", width=50, height=50)
 
         # Segmented button for navigation
         self.segmented_button = ctk.CTkSegmentedButton(
@@ -105,6 +105,22 @@ class App(ctk.CTk):
         #Maak frame voor inhoud
         self.main_frame = ctk.CTkScrollableFrame(self)
         self.main_frame.pack(fill="both", expand=True)
+
+    def ask_shutoff(self):
+        # Vraag bevestiging voor afsluiten
+        confirm_window = ctk.CTkToplevel(self)
+        confirm_window.title("Bevestig Afsluiten")
+        confirm_window.geometry("300x150")
+        confirm_window.resizable(False, False)
+
+        label = ctk.CTkLabel(confirm_window, text="Weet je zeker dat je de Raspberry Pi wilt afsluiten?", font=self.font)
+        label.pack(pady=20)
+
+        yes_button = ctk.CTkButton(confirm_window, text="Ja", command=lambda: self.shutdown_pi())
+        yes_button.pack(side="left", padx=20, pady=10)
+
+        no_button = ctk.CTkButton(confirm_window, text="Nee", command=confirm_window.destroy)
+        no_button.pack(side="right", padx=20, pady=10)
     def shutdown_pi(self):
         try:
             self.quit()
