@@ -5,7 +5,41 @@ from logic.config import *
 from logic.validation.general import *
 from logic.JsonHandler import  *
 from logic.config import PRODUCT_CONFIG, DIVER, CTD, SERIE, ENKEL
-from arduinoComm import *
+
+# Commandos voor Diver USB reading unit
+COMMAND_SERIAL = b'\x01\x4E\x32\x34\x02\x03\xBA\xA0'
+COMMAND_PRESSURE = b'\x01\x47\x32\x38\x02\x03\xB7\xA0'
+COMMAND_PUSHSERIE = b'\x01\x46\x32\x34\x02\x2E\x2E\x30\x30\x2D\x46\x4E\x30\x38\x36\x20\x20\x32\x31\x39\x2E\x47\x65\x31\x30\x38\x39\x31\x31\x35\x36\x55\x54\x43\x2B\x31\x20\x20\x20\x20\x20\x03\x80D\xA0'
+
+
+# from arduinoComm import *
+def read_barcode(port, baudrate=9600, timeout=2):
+    """Lees de barcode van de opgegeven seriële poort."""
+    try:
+        with serial.Serial(port, baudrate, timeout=timeout) as ser:
+            print(f"Verbonden met {port}. Wachten op barcode...")
+            while True:
+                # Lees de barcode en verwijder ongewenste witruimtes
+                data = ser.readline().decode('utf-8').strip()
+                if data:
+                    print(f"Barcode gescand: {data}")
+                    return data
+                else:
+                    print("Wachten op barcode...")
+    except serial.SerialException as e:
+        print(f"Fout bij het openen van de seriële poort: {e}")
+        return None
+    except Exception as e:
+        print(f"Onverwachte fout: {e}")
+        return None
+def find_all_devices():
+    found_devices = {}
+    ports = serial.tools.list_ports.comports()
+    for name, info in DEVICES.items():
+        match = next((p.device for p in ports if p.vid == info["vid"] and p.pid == info["pid"]), None)
+        found_devices[name] = match
+    return found_devices
+
 def make_line(app):
     ctk.CTkFrame(app.main_frame, height=2, width=app.screen_width, fg_color="gray").pack(pady=1)
 
@@ -202,6 +236,7 @@ def Barcode_to_raspberry():
         print(f"Fout bij {ScannerPort}: {e}")
 
 def bevestig(app):
+    from arduinoComm import send_command
     instellingen_ok = app.instellingen_ok.get()
     checklist_waarden = {k: v.get() for k, v in app.checklist_vars.items()}
     send_command(f'PRODUCT:{app.product_menu.get()}')
@@ -250,3 +285,112 @@ class CustomDateEntry(ctk.CTkEntry):
         if self._popup:
             self._popup.destroy()
 
+
+def create_command(serienummer):
+    """
+    Cre�ert een commando dat naar het apparaat gestuurd kan worden.
+
+    Args:
+        serienummer (str): Het serienummer dat geprogrammeerd moet worden.
+
+    Returns:
+        bytes: Het commando dat verstuurd moet worden.
+    """
+    serienummer_bytes = serienummer.encode()  # Converteer naar bytes
+    base_command = (
+        b'\x01\x46\x32\x34\x02\x2E\x2E\x30\x30\x2D'
+        + serienummer_bytes
+        + b'\x20\x20\x32\x31\x39\x2E\x47\x65\x31\x30\x38\x39\x31\x31\x35\x36\x55\x54\x43\x2B\x31\x20\x20\x20\x20\x20\x03'
+    )
+    checksum = calculate_checksum(base_command)
+    return base_command + bytes([checksum]) + b'\xA0'
+def send_command(readUnitSer, command):
+    """
+    Stuurt een commando naar het apparaat via de seriele verbinding.
+
+    Args:
+        serial_conn: De seriele verbinding.
+        command (bytes): Het commando dat gestuurd moet worden.
+    """
+    readUnitSer.write(command)
+    readUnitSer.flush()
+
+
+def read_response(readUnitSer, duration):
+    """
+    Leest de respons van het apparaat via de seriele verbinding.
+
+    Args:
+        serial_conn: De seriele verbinding.
+        duration (float): De maximale tijd in seconden om te wachten op de respons.
+
+    Returns:
+        str: De respons als string, of None als er geen respons is.
+    """
+    start_time = time.time()
+    response = b""
+    while time.time() - start_time < duration:
+        if readUnitSer.in_waiting > 0:
+            response += readUnitSer.read(readUnitSer.in_waiting)
+
+        if b"\n" in response:  # Aannemen dat een nieuwe regel de respons afsluit
+            break
+    return response.decode(errors="replace").strip() if response else None
+def calculate_checksum(command):
+    total = sum(command)  # Som van alle bytewaarden
+    checksum = total & 0xFF  # Houd alleen de laatste 8 bits
+    return checksum
+
+import traceback
+def Prog_Diver(Serienummer, ReadingUnitPort, baudrate=9600):
+
+    try:
+        readUnitSer = serial.Serial(ReadingUnitPort, baudrate)
+        print(f"Programmeren van apparaat met serienummer: {Serienummer}")
+        command = create_command(Serienummer)
+        send_command(readUnitSer, command)
+        response = read_response(readUnitSer, 2)
+        print(f"Respons: {response if response else 'Geen respons'}")
+    except Exception as e:
+        print(f"[Prog_Diver] Fout: {e}")
+        traceback.print_exc()
+    return True
+
+def Diver_Read_Unit_to_raspberry(ReadingUnitPort, baudrate=9600):
+    try:
+        readUnitSer = serial.Serial(ReadingUnitPort, baudrate)
+
+        # Initialiseer defaults
+        uitgelezen_serial = "UNKNOWN"
+        uitgelezen_druk = "UNKNOWN"
+        uitgelezen_temp = "UNKNOWN"
+
+        # Lees het serienummer
+        send_command(readUnitSer, COMMAND_SERIAL)
+        serial_response = read_response(readUnitSer, timeout)
+        if serial_response and "-" in serial_response:
+            try:
+                uitgelezen_serial = serial_response.split("-")[1][:5]
+            except IndexError:
+                print("Fout bij parseren van serienummer.")
+
+        # Lees druk en temperatuur
+        send_command(readUnitSer, COMMAND_PRESSURE)
+        pressure_response = read_response(readUnitSer, timeout)
+        if pressure_response and "G28" in pressure_response:
+            try:
+                uitgelezen_druk = pressure_response[5:12]
+                uitgelezen_temp = pressure_response[15:22]
+            except IndexError:
+                print("Fout bij parseren van druk/temperatuur.")
+
+        return uitgelezen_serial, uitgelezen_druk, uitgelezen_temp
+
+    except Exception as e:
+        print(f"Fout bij seriële communicatie: {e}")
+        return "ERROR", "ERROR", "ERROR"
+
+def init_device():
+    from helperfunctions import find_all_devices
+    device_ports = find_all_devices()
+    return device_ports

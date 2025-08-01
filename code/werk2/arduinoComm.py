@@ -2,8 +2,9 @@ import serial
 import threading
 import queue
 import time
+from logic.config import device_ports
 
-COM_PORT = 'COM7'
+COM_PORT = device_ports.get("arduino Due")
 BAUD_RATE = 9600
 
 message_queue = queue.Queue()
@@ -39,6 +40,7 @@ def serial_read_loop():
         if stop_event.is_set():
             return
         arduino.write(b"Python_Booted\n")
+
         message_queue.put("📤 Verzend: Python_Booted")
 
         start_time = time.time()
@@ -62,7 +64,7 @@ def serial_read_loop():
 
     if not is_booted:
         message_queue.put("❌ Boot handshake mislukt na meerdere pogingen. Start programma opnieuw.")
-        stop_threads.set()  # Stop verdere communicatie als boot mislukt
+        stop_event.set()  # Stop verdere communicatie als boot mislukt
 
     # Hoofd seriële leesloop
     while not stop_event.is_set():
