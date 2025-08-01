@@ -85,7 +85,7 @@ class App(ctk.CTk):
         self.decrease_font_button = ctk.CTkButton(self.leftbar, text="-", command=lambda: decrease_font_size(self), width=50, height=30, font=("",15))
 
         self.off_image = ctk.CTkImage(light_image=OFF_IMAGE, dark_image=OFF_IMAGE, size=(50, 50))
-        self.off_button = ctk.CTkButton(self.rightbar, image=self.off_image, command=self.quit, fg_color="transparent", text="", hover_color="gray20", width=50, height=50)
+        self.off_button = ctk.CTkButton(self.rightbar, image=self.off_image, command=self.shutdown_pi, fg_color="transparent", text="", hover_color="gray20", width=50, height=50)
 
         # Segmented button for navigation
         self.segmented_button = ctk.CTkSegmentedButton(
@@ -105,7 +105,13 @@ class App(ctk.CTk):
         #Maak frame voor inhoud
         self.main_frame = ctk.CTkScrollableFrame(self)
         self.main_frame.pack(fill="both", expand=True)
-
+    def shutdown_pi(self):
+        try:
+            self.quit()
+            subprocess.run(['sudo', 'shutdown', '-h', 'now'], check=True)
+            print("Raspberry Pi wordt afgesloten...")
+        except subprocess.CalledProcessError as e:
+            print(f"Fout bij afsluiten: {e}")
     def load_settings_screen(self):
         #Header tekst
         ctk.CTkLabel(self.main_frame, text="Selecteer productielijn", font=self.font).pack(pady=5)
