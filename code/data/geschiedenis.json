@@ -11363,5 +11363,48 @@
                 "divers geplaatst": false
             }
         }
+    },
+    {
+        "product": "Diver",
+        "tijd": "2025-08-25T14:46:45.051308",
+        "data": {
+            "Productielijn": "Diver",
+            "Type": "DI801",
+            "Aantal": "5",
+            "Productie modus": {
+                "Modus": "Series",
+                "Start Serienummer": "TW627",
+                "Eind Serienummer": "TW631",
+                "Serienummers": "TW627\nTW628\nTW629\nTW630\nTW631"
+            },
+            "Ordernummer": "",
+            "Datum": "25-08-2025",
+            "Naam medewerker": ""
+        }
+    },
+    {
+        "product": "Diver",
+        "tijd": "2025-08-25T14:46:48.413743",
+        "data": {
+            "Productielijn": "Diver",
+            "Type": "DI801",
+            "Aantal": "5",
+            "Productie modus": {
+                "Modus": "Series",
+                "Start Serienummer": "TW627",
+                "Eind Serienummer": "TW631",
+                "Serienummers": "TW627\nTW628\nTW629\nTW630\nTW631"
+            },
+            "Ordernummer": "",
+            "Datum": "25-08-2025",
+            "Naam medewerker": "",
+            "Instellingen OK": false,
+            "Checklist OK": {
+                "Juiste nulspanplaat gebruikt": false,
+                "Graveermachine correct ingesteld": false,
+                "Juiste submodules geplaatst": false,
+                "divers geplaatst": false
+            }
+        }
     }
 ]

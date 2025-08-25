@@ -73,11 +73,17 @@ DEVICES = {
 
 }
 
-def init_device():
+def init_device(retry):
     from helperfunctions import find_all_devices
+
+
     device_ports = find_all_devices()
+    if retry == True:
+        warning_window.destroy
+
     return device_ports
-device_ports = init_device()
+
+device_ports = init_device(False)
 
 # Commandos voor Diver USB reading unit
 COMMAND_SERIAL = b'\x01\x4E\x32\x34\x02\x03\xBA\xA0'

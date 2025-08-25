@@ -13,6 +13,7 @@ from serial_simulator import SerialSimulatorWindow
 
 
 class App(ctk.CTk):
+
     def __init__(self):
         super().__init__()
         self.title("Assemblagelijn")
@@ -62,6 +63,27 @@ class App(ctk.CTk):
         label.pack(pady=20)
         sluitknop = ctk.CTkButton(warning_window, text="OK", command=warning_window.destroy)
         sluitknop.pack(pady=10)
+        opnieuwknop = ctk.CTkButton(
+            warning_window,
+            text="Opnieuw proberen",
+            command=lambda: self.retry_init_device(device, warning_window)
+        )
+        opnieuwknop.pack(pady=10)
+
+    def retry_init_device(self, device, warning_window):
+        # sluit de oude warning
+        warning_window.destroy()
+
+        # probeer opnieuw specifiek voor dit device
+        new_ports = init_device()  # haalt alle devices op
+        new_port = new_ports.get(device)
+
+        if new_port is None:
+            # nog steeds niet gevonden → toon opnieuw waarschuwing
+            self.warningNoDevice(device)
+        else:
+            # gelukt → update je self.device_ports
+            device_ports[device] = new_port
 
     def create_base_layout(self):
         #Maak boven frame
