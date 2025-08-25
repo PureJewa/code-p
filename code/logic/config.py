@@ -68,8 +68,8 @@ PRODUCT_CONFIG = {
 }
 DEVICES = {
     "barcodescanner": {"vid": 0x0483, "pid": 0x5740},
-    "Arduino": {"vid": 0x2341, "pid": 0x0042},
-    "ProgrameerUnit": {"vid": 0x2047 , "pid": 0x0ab9},
+    "arduino Due": {"vid": 0x2a03, "pid": 0x003d},
+    "programeerUnit": {"vid": 0x2047 , "pid": 0x0ab9},
 
 }
 
