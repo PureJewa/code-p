@@ -72,7 +72,11 @@ DEVICES = {
     "programeerUnit": {"vid": 0x2047 , "pid": 0x0ab9},
 
 }
-
+SEGMENTED_BUTTON_VALUES = {
+    "Instellingen": 0,
+    "Controle": 1,
+    "Besturing" : 2,
+}
 def init_device(retry):
     from helperfunctions import find_all_devices
 

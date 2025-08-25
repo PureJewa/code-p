@@ -112,7 +112,7 @@ class App(ctk.CTk):
         # Segmented button for navigation
         self.segmented_button = ctk.CTkSegmentedButton(
             self.centrebar,
-            values=["Instellingen", "Controle", "Besturing"],
+            values=list(SEGMENTED_BUTTON_VALUES),
             command=lambda value: switch_screen(self, value),
             state='normal',
         )
