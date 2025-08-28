@@ -394,3 +394,5 @@ def init_device():
     from helperfunctions import find_all_devices
     device_ports = find_all_devices()
     return device_ports
+
+

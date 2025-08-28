@@ -10,15 +10,16 @@ from logic.config import PRODUCT_CONFIG, LOGO_IMAGE, OFF_IMAGE, DEVICES, device_
 from helperfunctions import *
 from arduinoComm import *
 from serial_simulator import SerialSimulatorWindow
+from constants import *
+
 
 
 class App(ctk.CTk):
 
     def __init__(self):
         super().__init__()
-        self.title("Assemblagelijn")
-        # self.overrideredirect(True)  # Verwijdert titelbalk
-        self.attributes('-fullscreen', True)
+        self.title(app_title)
+        self.overrideredirect(True)  # Verwijdert titelbalk
 
         # Zet de grootte van het venster gelijk aan de schermresolutie
         self.screen_width = self.winfo_screenwidth()
@@ -31,15 +32,17 @@ class App(ctk.CTk):
         self.selected_product = None
         self.is_set = False
         self.amount_done = 0
+
         #Font grootte
         self.font_size = 15
-        self.font = ctk.CTkFont(family="Arial", size=self.font_size)
+        self.font = ctk.CTkFont(family=font, size=self.font_size)
 
+        #Check of Arduino is gestart
         if initialize_serial():
             threading.Thread(target=serial_read_loop, daemon=True).start()
             self.after(100, self.poll_arduino)
 
-        #Standaard scherm inladen
+        #Basis scherm laden
         self.create_base_layout()
         # Check welke apparaten missen
         for device_name, port in device_ports.items():
@@ -49,26 +52,18 @@ class App(ctk.CTk):
         #Eerste scherm laden
         switch_screen(self, "Instellingen")
 
-        #Laad een gewenst scherm is voor testen
-        # switch_screen(self, "Besturing")
-
-    def warningNoDevice(self, device):
+    def createWarningNoDeviceWindows(self):
         warning_window = ctk.CTkToplevel(self)
-        warning_window.title("Geen apparaat gevonden")
-        warning_window.geometry("300x150")
+        warning_window.title(warning_window_title)
+        warning_window.geometry(warning_window_size)
         warning_window.resizable(False, False)
         warning_window.attributes('-topmost', True)
-
-        label = ctk.CTkLabel(warning_window, text=f"Er is geen {device} gevonden.", font=("Arial", 14))
-        label.pack(pady=20)
-        sluitknop = ctk.CTkButton(warning_window, text="OK", command=warning_window.destroy)
-        sluitknop.pack(pady=10)
-        opnieuwknop = ctk.CTkButton(
-            warning_window,
-            text="Opnieuw proberen",
-            command=lambda: self.retry_init_device(device, warning_window)
-        )
-        opnieuwknop.pack(pady=10)
+        return warning_window
+    def warningNoDevice(self, device):
+        warning_window = self.createWarningNoDeviceWindows()
+        ctk.CTkLabel(warning_window, text=warning_window_lable.format(device), font=self.font).pack(pady=20)
+        ctk.CTkButton(warning_window, text=warning_window_button_ok, command=warning_window.destroy).pack(pady=10)
+        ctk.CTkButton(warning_window, text=warning_window_button_retry, command=lambda: self.retry_init_device(device, warning_window)).pack(pady=10)
 
     def retry_init_device(self, device, warning_window):
         # sluit de oude warning
@@ -176,6 +171,9 @@ class App(ctk.CTk):
         self.amount_entry.pack(pady=2)
         self.check_amount_button = ctk.CTkButton(self.main_frame, text="Check Aantal", command=self.check_amount, state="disabled", font=self.font)
         self.check_amount_button.pack(pady=2)
+
+        # Bind Enter in dit entry aan dezelfde command
+        self.amount_entry.bind("<Return>", lambda event: self.check_amount())
 
         self.amount_feedback = ctk.CTkLabel(self.main_frame, text="", font=self.font)
         self.amount_feedback.pack()
@@ -843,8 +841,14 @@ class App(ctk.CTk):
         if completed_products == total_products:
             self.progress_label.configure(text="Alle producten zijn klaar!")
 
+
+
+
 if __name__ == "__main__":
     ctk.set_appearance_mode("System")
     ctk.set_default_color_theme("blue")
     app = App()
     app.mainloop()
+
+
+
