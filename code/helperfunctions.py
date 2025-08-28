@@ -50,7 +50,7 @@ def reset_app(app):
         app.is_set = False
         for widget in app.main_frame.winfo_children():
             widget.destroy()
-        app.load_settings_screen()
+        app.loadSettingsScreen()
         app.product_menu.set(choice)
         app.product_menu.configure(fg_color='#1F6AA5')
         app.product_feedback.configure(text=f"")
@@ -165,7 +165,7 @@ def format_instellingen_voor_weergave(app):
     return "\n".join(regels)
 
 
-def switch_screen(app, name):
+def switchScreen(app, name):
     if name != "Instellingen":
         try:
             verzamel_instellingen(app)
@@ -178,7 +178,7 @@ def switch_screen(app, name):
         widget.forget()
 
     if name == "Instellingen":
-        app.load_settings_screen()
+        app.loadSettingsScreen()
         app.segmented_button.set("Instellingen")
     elif name == "Controle":
         app.load_controle_screen()
@@ -191,13 +191,13 @@ def increase_font_size(app):
     app.font_size += 1
     app.font.configure(size=app.font_size)
     _update_widget_fonts(app, app.topbar)
-    _update_widget_fonts(app, app.centrebar)
+    _update_widget_fonts(app, app.center_bar_frame)
     _update_widget_fonts(app, app.main_frame)
 def decrease_font_size(app):
     app.font_size -= 1
     app.font.configure(size=app.font_size)
     _update_widget_fonts(app, app.topbar)
-    _update_widget_fonts(app, app.centrebar)
+    _update_widget_fonts(app, app.center_bar_frame)
     _update_widget_fonts(app, app.main_frame)
 def _update_widget_fonts(app, widget):
     # Recursief alle widgets in de boom doorlopen

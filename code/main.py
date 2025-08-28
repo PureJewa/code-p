@@ -6,7 +6,7 @@ from logic.config import *
 from logic.JsonHandler import *
 from logic.validation.general import *
 from helperfunctions import *
-from logic.config import PRODUCT_CONFIG, LOGO_IMAGE, OFF_IMAGE, DEVICES, device_ports
+from logic.config import PRODUCT_CONFIG, logo_image, OFF_IMAGE, DEVICES, device_ports
 from helperfunctions import *
 from arduinoComm import *
 from serial_simulator import SerialSimulatorWindow
@@ -20,6 +20,8 @@ class App(ctk.CTk):
         super().__init__()
         self.title(app_title)
         self.overrideredirect(True)  # Verwijdert titelbalk
+        #MISSCHIEN IS DIT NODIG VOOR LINUX, CHECK DIT!
+        # self.attributes('-fullscreen', True)
 
         # Zet de grootte van het venster gelijk aan de schermresolutie
         self.screen_width = self.winfo_screenwidth()
@@ -43,30 +45,51 @@ class App(ctk.CTk):
             self.after(100, self.poll_arduino)
 
         #Basis scherm laden
-        self.create_base_layout()
+        self.CreateBaseLayout()
         # Check welke apparaten missen
         for device_name, port in device_ports.items():
             if port is None:
                 self.warningNoDevice(device_name)
 
         #Eerste scherm laden
-        switch_screen(self, "Instellingen")
+        switchScreen(self, "Instellingen")
 
     def createWarningNoDeviceWindows(self):
+        """
+        Maakt een waarschuwing venster aan als een apparaat niet is gevonden.
+        Returns: Het waarschuwing venster
+
+        """
         warning_window = ctk.CTkToplevel(self)
         warning_window.title(warning_window_title)
         warning_window.geometry(warning_window_size)
         warning_window.resizable(False, False)
         warning_window.attributes('-topmost', True)
+        warning_window.protocol("WM_DELETE_WINDOW", lambda: None)
+
         return warning_window
     def warningNoDevice(self, device):
+        """
+        Toont een waarschuwing venster als een apparaat niet is gevonden.
+        Zorgt ervoor dat de gebruiker kan kiezen om opnieuw te proberen of het venster te sluiten.
+
+        Args
+            device: Het apparaat dat niet is gevonden.
+        """
         warning_window = self.createWarningNoDeviceWindows()
+
         ctk.CTkLabel(warning_window, text=warning_window_lable.format(device), font=self.font).pack(pady=20)
         ctk.CTkButton(warning_window, text=warning_window_button_ok, command=warning_window.destroy).pack(pady=10)
-        ctk.CTkButton(warning_window, text=warning_window_button_retry, command=lambda: self.retry_init_device(device, warning_window)).pack(pady=10)
+        ctk.CTkButton(warning_window, text=warning_window_button_retry, command=lambda: self.RetryInitDevice(device, warning_window)).pack(pady=10)
 
-    def retry_init_device(self, device, warning_window):
-        # sluit de oude warning
+    def RetryInitDevice(self, device, warning_window):
+        """
+        Probeer opnieuw het apparaat te initialiseren.
+        Args
+            device: Het apparaat dat opnieuw moet worden geïnitialiseerd.
+            warning_window:
+        """
+        # sluit de warning window
         warning_window.destroy()
 
         # probeer opnieuw specifiek voor dit device
@@ -77,40 +100,40 @@ class App(ctk.CTk):
             # nog steeds niet gevonden → toon opnieuw waarschuwing
             self.warningNoDevice(device)
         else:
-            # gelukt → update je self.device_ports
+            # gelukt → update de self.device_ports
             device_ports[device] = new_port
 
-    def create_base_layout(self):
+    def CreateBaseLayout(self):
+        """
+        Maakt de basis layout van de applicatie aan.
+        Bovenste balk met logo, knoppen en navigatie
+        En een hoofdframe voor de inhoud
+        """
         #Maak boven frame
-        self.topbar = ctk.CTkFrame(self, height=50)
-        self.topbar.pack(fill="x", padx=10, pady=10)
+        self.topbar_frame = ctk.CTkFrame(self, height=topbar_height)
+        self.topbar_frame.pack(fill="x", padx=top_bar_padding, pady=top_bar_padding)
 
         #Maak frames voor links midden rechts
-        self.leftbar = ctk.CTkFrame(self.topbar)
-        self.centrebar = ctk.CTkFrame(self.topbar)
-        self.rightbar = ctk.CTkFrame(self.topbar)
+        self.left_bar_frame = ctk.CTkFrame(self.topbar_frame)
+        self.center_bar_frame = ctk.CTkFrame(self.topbar_frame)
+        self.right_bar_frame = ctk.CTkFrame(self.topbar_frame)
 
-        self.leftbar.pack(side="left")
-        self.centrebar.pack(side="left", fill="x", expand=True)
-        self.rightbar.pack(side="right")
+        self.left_bar_frame.pack(side="left")
+        self.center_bar_frame.pack(side="left", fill="x", expand=True)
+        self.right_bar_frame.pack(side="right")
 
-        #Laad afbeeldingen
-        self.logo_image = ctk.CTkImage(light_image=LOGO_IMAGE, dark_image=LOGO_IMAGE, size=(50, 50))
-        self.logo_label = ctk.CTkLabel(self.leftbar, image=self.logo_image, fg_color="transparent", text="")
+        #Laad knoppen en logo
+        self.logo_image = ctk.CTkImage(light_image=logo_image, dark_image=logo_image, size=top_bar_image_size)
+        self.logo_label = ctk.CTkLabel(self.left_bar_frame, image=self.logo_image, fg_color="transparent", text="")
 
-        self.increase_font_button = ctk.CTkButton(self.leftbar, text="+", command=lambda: increase_font_size(self), width=50, height=30, font=("",15))
-        self.decrease_font_button = ctk.CTkButton(self.leftbar, text="-", command=lambda: decrease_font_size(self), width=50, height=30, font=("",15))
+        self.increase_font_button = ctk.CTkButton(self.left_bar_frame, text="+", command=lambda: increase_font_size(self), width=50, height=30, font=(font, 15))
+        self.decrease_font_button = ctk.CTkButton(self.left_bar_frame, text="-", command=lambda: decrease_font_size(self), width=50, height=30, font=(font, 15))
 
-        self.off_image = ctk.CTkImage(light_image=OFF_IMAGE, dark_image=OFF_IMAGE, size=(50, 50))
-        self.off_button = ctk.CTkButton(self.rightbar, image=self.off_image, command=self.quit, fg_color="transparent", text="", hover_color="gray20", width=50, height=50)
+        self.off_image = ctk.CTkImage(light_image=OFF_IMAGE, dark_image=OFF_IMAGE, size=top_bar_image_size)
+        self.off_button = ctk.CTkButton(self.right_bar_frame, image=self.off_image, command=self.quit, fg_color="transparent", text="", hover_color="gray20", width=50, height=50)
 
         # Segmented button for navigation
-        self.segmented_button = ctk.CTkSegmentedButton(
-            self.centrebar,
-            values=list(SEGMENTED_BUTTON_VALUES),
-            command=lambda value: switch_screen(self, value),
-            state='normal',
-        )
+        self.segmented_button = ctk.CTkSegmentedButton(self.center_bar_frame, values=list(segmented_button_values), command=lambda value: switchScreen(self, value))
 
         #Laten zien op in het scherm
         self.logo_label.pack(side='left')
@@ -122,64 +145,67 @@ class App(ctk.CTk):
         #Maak frame voor inhoud
         self.main_frame = ctk.CTkScrollableFrame(self)
         self.main_frame.pack(fill="both", expand=True)
+    def productWidgets(self):
+        """"
+        Maakt de widgets aan voor het selecteren van een product.
+        Dropdown menu, knop om product te controleren, label voor feedback
+        """
+        # Label voor product selectie
+        ctk.CTkLabel(self.main_frame, text=setting_screen_product_label_text, font=self.font).pack(pady=setting_screen_padding_block)
 
-    def load_settings_screen(self):
-        #Header tekst
-        ctk.CTkLabel(self.main_frame, text="Selecteer productielijn", font=self.font).pack(pady=5)
         # Maak dropdown aan
-        self.product_menu = ctk.CTkOptionMenu(
-            self.main_frame,
-            values=list(PRODUCT_CONFIG.keys()),
-            font=self.font,
-            command=lambda _: reset_app(self)
-        )
-        self.product_menu.pack(pady=2)
-        # self.product_menu.configure(command =lambda: reset_app(self, self.is_set))
+        self.product_menu = ctk.CTkOptionMenu(self.main_frame, values=list(PRODUCT_CONFIG.keys()), font=self.font, command=lambda _: reset_app(self))
+        self.product_menu.pack(pady=setting_screen_padding_block)
+
         # Knop om product te controleren.
-        self.check_product_button = ctk.CTkButton(
-            self.main_frame,
-            text="Check Product",
-            font=self.font,
-            command=lambda: check_product(self, self.product_menu.get())
-        )
-        self.check_product_button.pack(pady=2)
+        self.check_product_button = ctk.CTkButton(self.main_frame, text=setting_screen_product_button_text, font=self.font, command=lambda: check_product(self, self.product_menu.get()))
+        self.check_product_button.pack(pady=setting_screen_padding_block)
 
-        # Label voor feedback
+        # Label voor feedback, leeg bij start
         self.product_feedback = ctk.CTkLabel(self.main_frame, text="", font=self.font)
-        self.product_feedback.pack()
+        self.product_feedback.pack(pady=setting_screen_padding)
 
-        make_line(self)
+    def typeWidgets(self):
+        """
+        Maak de widgets aan voor het selecteren van een type.
+        """
+        #Header voor type selectie
+        ctk.CTkLabel(self.main_frame, text=setting_screen_type_label_text, font=self.font).pack(pady=setting_screen_padding_block)
 
-        # Type selectie
-        ctk.CTkLabel(self.main_frame, text="Selecteer type", font=self.font).pack(pady=5)
+        #Dropdown menu voor type selectie
         self.type_menu = ctk.CTkOptionMenu(self.main_frame, values=PRODUCT_CONFIG[self.product_menu.get()]["types"], state="disabled" , font=self.font)
-        self.type_menu.pack()
+        self.type_menu.pack(pady=setting_screen_padding_block)
 
         #Knop voor type check
-        self.check_type_button = ctk.CTkButton(self.main_frame, text="Check Type", command=lambda: check_type(self), state="disabled", font=self.font)
-        self.check_type_button.pack(pady=2)
+        self.check_type_button = ctk.CTkButton(self.main_frame, text=setting_screen_type_button_text, command=lambda: check_type(self), state="disabled", font=self.font)
+        self.check_type_button.pack(pady=setting_screen_padding_block)
 
         #Label voor type
         self.typeLabel = ctk.CTkLabel(self.main_frame, text="", font=self.font)
-        self.typeLabel.pack()
+        self.typeLabel.pack(pady=setting_screen_padding)
 
-        make_line(self)
+    def amountWidgets(self):
+        """
+        Maak widgets aan voor het invoeren van een hoeveelheid.
+        """
+        # Header voor aantal
+        ctk.CTkLabel(self.main_frame, text=setting_screen_amount_label_text, font=self.font).pack(pady=setting_screen_padding_block)
 
-        # Aantal invoer
-        ctk.CTkLabel(self.main_frame, text="Aantal", font=self.font).pack(pady=2)
-        self.amount_entry = ctk.CTkEntry(self.main_frame, state="normal", font=self.font)
-        self.amount_entry.pack(pady=2)
-        self.check_amount_button = ctk.CTkButton(self.main_frame, text="Check Aantal", command=self.check_amount, state="disabled", font=self.font)
-        self.check_amount_button.pack(pady=2)
+        # Invoerveld voor aantal
+        self.amount_entry = ctk.CTkEntry(self.main_frame, state="disabled", font=self.font)
+        self.amount_entry.pack(pady=setting_screen_padding_block)
+
+        #Knop voor aantal check
+        self.check_amount_button = ctk.CTkButton(self.main_frame, text=setting_screen_amount_button_text, command=self.check_amount, state="disabled", font=self.font)
+        self.check_amount_button.pack(pady=setting_screen_padding_block)
 
         # Bind Enter in dit entry aan dezelfde command
         self.amount_entry.bind("<Return>", lambda event: self.check_amount())
 
         self.amount_feedback = ctk.CTkLabel(self.main_frame, text="", font=self.font)
-        self.amount_feedback.pack()
+        self.amount_feedback.pack(pady=setting_screen_padding)
 
-        make_line(self)
-
+    def soortProductieWidgets(self):
         # Productiemodus selectie, laat de gebruiker kiezen tussen reeks productie (serie) of individueel productie (enkel)
         ctk.CTkLabel(self.main_frame, text="Productiemodus", font=self.font).pack(pady=2)
         self.series_button = ctk.CTkButton(self.main_frame, text="Series", command=lambda: self.set_mode(SERIE),
@@ -204,18 +230,6 @@ class App(ctk.CTk):
                                                  command=self.serial, font=self.font)
         self.check_serial_button.pack_forget()
 
-        make_line(self)
-
-        # Ordernummer invoer
-        self.order_label = ctk.CTkLabel(self.main_frame, text="Order nummer", font=self.font)
-        self.order_label.pack(pady=2)
-
-        self.order_entry = ctk.CTkEntry(self.main_frame, state="disabled", font=self.font)
-        self.order_entry.pack(pady=2)
-
-        self.order_button = ctk.CTkButton(self.main_frame, text="Check Order nummer", state="normal", command=lambda: checkOrderNumber(self), font=self.font)
-        self.order_button.pack(pady=2)
-
         # Laad de laatste serienummer uit het JSON-bestand
         instellingen_data = load_settings(product=self.selected_product)
         productie_modus = instellingen_data.get("Productie modus", {})
@@ -226,14 +240,45 @@ class App(ctk.CTk):
             self.serial_entry.insert(0, laatste_serial)
 
 
-        make_line(self)
+    def orderNummerWidgets(self):
+        # Ordernummer invoer
+        self.order_label = ctk.CTkLabel(self.main_frame, text="Order nummer", font=self.font)
+        self.order_label.pack(pady=2)
 
+        self.order_entry = ctk.CTkEntry(self.main_frame, state="disabled", font=self.font)
+        self.order_entry.pack(pady=2)
+
+        self.order_button = ctk.CTkButton(self.main_frame, text="Check Order nummer", state="normal", command=lambda: checkOrderNumber(self), font=self.font)
+        self.order_button.pack(pady=2)
+
+    def datumWidgets(self):
 
         self.date_label = ctk.CTkLabel(self.main_frame, text="Datum", font=self.font)
         self.date_label.pack(pady=2)
         self.date_entry = CustomDateEntry(self.main_frame, font=self.font, state="disabled")
         self.date_entry.pack(pady=2)
 
+    def loadSettingsScreen(self):
+        """
+        Laad het instellingen scherm.
+        Maakt alle widgets aan voor het instellingen scherm.
+        """
+        self.productWidgets()
+        make_line(self)
+
+        self.typeWidgets()
+        make_line(self)
+
+        self.amountWidgets()
+        make_line(self)
+
+        self.soortProductieWidgets()
+        make_line(self)
+
+        self.orderNummerWidgets()
+        make_line(self)
+
+        self.datumWidgets()
         make_line(self)
 
         self.person_label = ctk.CTkLabel(self.main_frame, text="Naam medewerker", font=self.font)
@@ -574,7 +619,7 @@ class App(ctk.CTk):
         if product:
             for widget in self.scrollable_frame.winfo_children():
                 widget.forget()
-            self.load_settings_screen()
+            self.loadSettingsScreen()
         self.selected_product = product
         # Knopkleuren bij selectie
         for key, button in self.product_buttons.items():

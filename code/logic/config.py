@@ -12,11 +12,8 @@ logo_path = os.path.join(BASE_DIR, "img", "LogoImage.png")
 off_path = os.path.join(BASE_DIR, "img", "OffImage.png")
 
 # Afbeeldingen laden
-_logo_pil = Image.open(logo_path)
-_off_pil = Image.open(off_path)
-
-LOGO_IMAGE = _logo_pil
-OFF_IMAGE = _off_pil
+logo_image = Image.open(logo_path)
+OFF_IMAGE = Image.open(off_path)
 
 DIVER = "Diver"
 CTD = "CTD"
@@ -72,7 +69,7 @@ DEVICES = {
     "programeerUnit": {"vid": 0x2047 , "pid": 0x0ab9},
 
 }
-SEGMENTED_BUTTON_VALUES = [
+segmented_button_values = [
     "Instellingen",
     "Controle",
     "Besturing"
