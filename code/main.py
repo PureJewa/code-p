@@ -206,29 +206,36 @@ class App(ctk.CTk):
         self.amount_feedback.pack(pady=setting_screen_padding)
 
     def soortProductieWidgets(self):
+        """
+        Maak widgets aan voor het selecteren van de productiemodus.
+        """
         # Productiemodus selectie, laat de gebruiker kiezen tussen reeks productie (serie) of individueel productie (enkel)
-        ctk.CTkLabel(self.main_frame, text="Productiemodus", font=self.font).pack(pady=2)
-        self.series_button = ctk.CTkButton(self.main_frame, text="Series", command=lambda: self.set_mode(SERIE),
-                                           state="disabled", font=self.font)
-        self.series_button.pack(pady=2)
-        self.single_button = ctk.CTkButton(self.main_frame, text="Enkel", command=lambda: self.set_mode(ENKEL),
-                                           state="disabled", font=self.font)
-        self.single_button.pack(pady=2)
+        ctk.CTkLabel(self.main_frame, text=setting_screen_soort_productie_label_text, font=self.font).pack(pady=setting_screen_padding_block)
+
+        self.series_button = ctk.CTkButton(self.main_frame, text=setting_screen_series_button_text, command=lambda: self.set_mode(SERIE),state="disabled", font=self.font)
+        self.series_button.pack(pady=setting_screen_padding_block)
+
+        self.single_button = ctk.CTkButton(self.main_frame, text=setting_screen_single_button_text, command=lambda: self.set_mode(ENKEL),state="disabled", font=self.font)
+        self.single_button.pack(pady=setting_screen_padding_block)
 
         self.serial_label = ctk.CTkLabel(self.main_frame, text="", font=self.font)
-        self.serial_label.pack(pady=(20, 5), after=self.single_button)
+        self.serial_label.pack(pady=setting_screen_padding_block)
 
         # Maak de invoervelden aan, ze worden eerst verborgen zodat de juiste kan worden getoond op basis van de gekozen productiemodus
         self.serial_entry = ctk.CTkEntry(self.main_frame, font=self.font)
         self.serial_entry.pack_forget()  # eerst verbergen
+        self.serial_entry.bind("<Return>", lambda event: self.serial())
 
         self.serial_textbox = ctk.CTkTextbox(self.main_frame, height=100, font=self.font)
         self.serial_textbox.pack_forget() # eerst verbergen
+        self.serial_textbox.bind("<Return>", lambda event: self.serial())
 
         # Knop om serienummers te controleren, ook deze wordt eerst verborgen om verwarring te voorkomen
-        self.check_serial_button = ctk.CTkButton(self.main_frame, text="Check Serienummer",
-                                                 command=self.serial, font=self.font)
+        self.check_serial_button = ctk.CTkButton(self.main_frame, text=setting_screen_check_serial_button_text,command=self.serial, font=self.font)
         self.check_serial_button.pack_forget()
+
+        self.serial_feedback = ctk.CTkLabel(self.main_frame, text="", font=self.font)
+        self.serial_feedback.pack(pady=setting_screen_padding)
 
         # Laad de laatste serienummer uit het JSON-bestand
         instellingen_data = load_settings(product=self.selected_product)
@@ -242,21 +249,42 @@ class App(ctk.CTk):
 
     def orderNummerWidgets(self):
         # Ordernummer invoer
-        self.order_label = ctk.CTkLabel(self.main_frame, text="Order nummer", font=self.font)
-        self.order_label.pack(pady=2)
+        self.order_label = ctk.CTkLabel(self.main_frame, text=setting_screen_ordernumber_label_text, font=self.font)
+        self.order_label.pack(pady=setting_screen_padding_block)
 
         self.order_entry = ctk.CTkEntry(self.main_frame, state="disabled", font=self.font)
-        self.order_entry.pack(pady=2)
+        self.order_entry.pack(pady=setting_screen_padding_block)
+        self.order_entry.bind("<Return>", lambda event: self.checkOrderNumber())
 
-        self.order_button = ctk.CTkButton(self.main_frame, text="Check Order nummer", state="normal", command=lambda: checkOrderNumber(self), font=self.font)
-        self.order_button.pack(pady=2)
+        self.order_button = ctk.CTkButton(self.main_frame, text=setting_screen_ordernumber_button_text, state="normal", command=lambda: checkOrderNumber(self), font=self.font)
+        self.order_button.pack(pady=setting_screen_padding_block)
+
+        self.order_feedback = ctk.CTkLabel(self.main_frame, text="", font=self.font)
+        self.order_feedback.pack(pady=setting_screen_padding)
 
     def datumWidgets(self):
-
-        self.date_label = ctk.CTkLabel(self.main_frame, text="Datum", font=self.font)
-        self.date_label.pack(pady=2)
+        """
+        Maakt widgets aan voor het invoeren van de datum.
+        """
+        self.date_label = ctk.CTkLabel(self.main_frame, text=setting_screen_date_label_text, font=self.font)
+        self.date_label.pack(pady=setting_screen_padding_block)
         self.date_entry = CustomDateEntry(self.main_frame, font=self.font, state="disabled")
-        self.date_entry.pack(pady=2)
+        self.date_entry.pack(pady=setting_screen_padding_block)
+
+    def personWidgets(self):
+        """
+        Maak widgets aan voor het invoeren van de naam van de medewerker.
+        """
+        self.person_label = ctk.CTkLabel(self.main_frame, text=setting_screen_person_label_text, font=self.font)
+        self.person_label.pack(pady=setting_screen_padding_block)
+
+        self.person_entry = ctk.CTkEntry(self.main_frame, state="disabled", font=self.font)
+        self.person_entry.pack(pady=setting_screen_padding_block)
+        self.person_entry.bind("<Return>", lambda event: self.checkPerson())
+
+        self.person_button = ctk.CTkButton(self.main_frame, text=setting_screen_person_button_text, state="disabled", command= lambda: checkPerson(self), font=self.font)
+        self.person_button.pack(pady=setting_screen_padding_block   )
+
 
     def loadSettingsScreen(self):
         """
@@ -281,14 +309,7 @@ class App(ctk.CTk):
         self.datumWidgets()
         make_line(self)
 
-        self.person_label = ctk.CTkLabel(self.main_frame, text="Naam medewerker", font=self.font)
-        self.person_label.pack(pady=2)
-
-        self.person_entry = ctk.CTkEntry(self.main_frame, state="disabled", font=self.font)
-        self.person_entry.pack(pady=2)
-
-        self.person_button = ctk.CTkButton(self.main_frame, text="Check Naam", state="disabled", command= lambda: checkPerson(self), font=self.font)
-        self.person_button.pack(pady=2)
+        self.personWidgets()
 
     def show_device_status(self, device_ports, control_frame):
         for device_name, port in device_ports.items():
@@ -665,8 +686,8 @@ class App(ctk.CTk):
 
     def set_mode(self, mode):
         self.production_mode = mode
-        self.series_button.configure(fg_color="green" if mode == SERIE else "#1F6AA5")
-        self.single_button.configure(fg_color="green" if mode == ENKEL else "#1F6AA5")
+        self.series_button.configure(fg_color=positive_feedback_color if mode == SERIE else standard_button_color)
+        self.single_button.configure(fg_color=positive_feedback_color if mode == ENKEL else standard_button_color)
 
         self.serial_label.configure(
             text="Start serienummer" if mode == SERIE else "Voer serienummer(s) in"
@@ -692,16 +713,18 @@ class App(ctk.CTk):
             self.serial_textbox.pack(pady=2, after=self.serial_label)
             self.check_serial_button.pack(pady=5, after=self.serial_textbox)
 
+
+
     def serial(self):
 
         if not self.selected_product:
-            self.serial_label.configure(text="Selecteer eerst een product", text_color="red")
+            self.serial_feedback.configure(text="Selecteer eerst een product", text_color="red")
             return
 
         try:
             amount = int(self.amount_entry.get())
         except ValueError:
-            self.serial_label.configure(text="Ongeldig aantal", text_color="red")
+            self.serial_feedback.configure(text="Ongeldig aantal", text_color="red")
             return
 
         if self.production_mode == SERIE:
@@ -716,19 +739,20 @@ class App(ctk.CTk):
             serials = generate_serials(self.serial_entry.get().upper(), int(self.amount_entry.get()),
                                        PRODUCT_CONFIG[self.selected_product]["serial_pattern"])
             if serials:
-                self.serial_label.configure(text=f"Laatst serienummer: {serials[-1]}", text_color="green")
+                self.serial_feedback.configure(text=f"Laatst serienummer: {serials[-1]}", text_color="green")
+                self.serial_entry.configure(fg_color=positive_feedback_color)
                 self.order_button.configure(state="normal")
                 self.order_entry.configure(state="normal")
 
             else:
-                self.serial_label.configure(text="Kon serienummers niet genereren", text_color="red")
+                self.serial_feedback.configure(text="Kon serienummers niet genereren", text_color="red")
 
         elif self.production_mode == ENKEL:
             serials = self.serial_textbox.get("1.0", "end").strip().splitlines()
             serials = [s.strip().upper() for s in serials if s.strip() != ""]
 
             if len(serials) != amount:
-                self.serial_label.configure(text=f"{len(serials)} serienummers ingevoerd, verwacht {amount}",
+                self.serial_feedback.configure(text=f"{len(serials)} serienummers ingevoerd, verwacht {amount}",
                                             text_color="red")
                 return
 
@@ -739,7 +763,8 @@ class App(ctk.CTk):
                 elif self.selected_product == CTD and not self._validate_ctd_serial(s):
                     return
 
-            self.serial_label.configure(text="Alle serienummers OK ✅", text_color="green")
+            self.serial_feedback.configure(text="Alle serienummers OK ✅", text_color="green")
+            self.serial_textbox.configure(fg_color=positive_feedback_color)
             self.order_button.configure(state="normal")
             self.order_entry.configure(state="normal")
 
@@ -809,6 +834,15 @@ class App(ctk.CTk):
                 print(f"✅ {serial} is volledig verwerkt.")
                 self.after(500, self.send_next_serial_to_arduino)
 
+    def checkOrderNumber(self):
+        order_nummer = self.order_entry.get().strip()
+        if order_nummer:
+            self.order_entry.configure(fg_color=positive_feedback_color)
+            self.person_entry.configure(state="normal")
+            self.person_button.configure(state="normal")
+            self.order_feedback.configure(text="Order nummer is geldig ✅", text_color="green")
+        else:
+           self.order_feedback.configure(text="Order nummer is ongeldig ❌", text_color="red")
     def poll_arduino(self):
         while not message_queue.empty():
             msg = message_queue.get()

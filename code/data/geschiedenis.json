@@ -11406,5 +11406,23 @@
                 "divers geplaatst": false
             }
         }
+    },
+    {
+        "product": "Diver",
+        "tijd": "2025-08-29T08:54:07.374649",
+        "data": {
+            "Productielijn": "Diver",
+            "Type": "DI801",
+            "Aantal": "4",
+            "Productie modus": {
+                "Modus": "Series",
+                "Start Serienummer": "TW631",
+                "Eind Serienummer": "TW634",
+                "Serienummers": "TW631\nTW632\nTW633\nTW634"
+            },
+            "Ordernummer": "1234",
+            "Datum": "29-08-2025",
+            "Naam medewerker": "j"
+        }
     }
 ]

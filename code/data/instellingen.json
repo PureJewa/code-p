@@ -2,23 +2,16 @@
     "Diver": {
         "Productielijn": "Diver",
         "Type": "DI801",
-        "Aantal": "5",
+        "Aantal": "4",
         "Productie modus": {
             "Modus": "Series",
-            "Start Serienummer": "TW627",
-            "Eind Serienummer": "TW631",
-            "Serienummers": "TW627\nTW628\nTW629\nTW630\nTW631"
+            "Start Serienummer": "TW631",
+            "Eind Serienummer": "TW634",
+            "Serienummers": "TW631\nTW632\nTW633\nTW634"
         },
-        "Ordernummer": "",
-        "Datum": "25-08-2025",
-        "Naam medewerker": "",
-        "Instellingen OK": false,
-        "Checklist OK": {
-            "Juiste nulspanplaat gebruikt": false,
-            "Graveermachine correct ingesteld": false,
-            "Juiste submodules geplaatst": false,
-            "divers geplaatst": false
-        }
+        "Ordernummer": "1234",
+        "Datum": "29-08-2025",
+        "Naam medewerker": "j"
     },
     "CTD": {
         "Productielijn": "CTD",
