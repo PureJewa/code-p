@@ -11424,5 +11424,606 @@
             "Datum": "29-08-2025",
             "Naam medewerker": "j"
         }
+    },
+    {
+        "product": "Diver",
+        "tijd": "2025-08-29T12:41:28.660517",
+        "data": {
+            "Productielijn": "Diver",
+            "Type": "DI801",
+            "Aantal": "5",
+            "Productie modus": {
+                "Modus": "Series",
+                "Start Serienummer": "TW634",
+                "Eind Serienummer": "TW638",
+                "Serienummers": "TW634\nTW635\nTW636\nTW637\nTW638"
+            },
+            "Ordernummer": "5",
+            "Datum": "29-08-2025",
+            "Naam medewerker": "j"
+        }
+    },
+    {
+        "product": "Diver",
+        "tijd": "2025-08-29T12:42:15.689762",
+        "data": {
+            "Productielijn": "Diver",
+            "Type": "DI801",
+            "Aantal": "5",
+            "Productie modus": {
+                "Modus": "Series",
+                "Start Serienummer": "TW638",
+                "Eind Serienummer": "TW642",
+                "Serienummers": "TW638\nTW639\nTW640\nTW641\nTW642"
+            },
+            "Ordernummer": "",
+            "Datum": "29-08-2025",
+            "Naam medewerker": ""
+        }
+    },
+    {
+        "product": "Diver",
+        "tijd": "2025-08-29T12:44:39.627317",
+        "data": {
+            "Productielijn": "Diver",
+            "Type": "DI801",
+            "Aantal": "5",
+            "Productie modus": {
+                "Modus": "Series",
+                "Start Serienummer": "TW642",
+                "Eind Serienummer": "TW646",
+                "Serienummers": "TW642\nTW643\nTW644\nTW645\nTW646"
+            },
+            "Ordernummer": "123",
+            "Datum": "29-08-2025",
+            "Naam medewerker": ""
+        }
+    },
+    {
+        "product": "Diver",
+        "tijd": "2025-08-29T12:45:25.535077",
+        "data": {
+            "Productielijn": "Diver",
+            "Type": "DI801",
+            "Aantal": "5",
+            "Productie modus": {
+                "Modus": "Series",
+                "Start Serienummer": "TW646",
+                "Eind Serienummer": "TW650",
+                "Serienummers": "TW646\nTW647\nTW648\nTW649\nTW650"
+            },
+            "Ordernummer": "",
+            "Datum": "29-08-2025",
+            "Naam medewerker": ""
+        }
+    },
+    {
+        "product": "Diver",
+        "tijd": "2025-08-29T12:46:48.005548",
+        "data": {
+            "Productielijn": "Diver",
+            "Type": "DI801",
+            "Aantal": "5",
+            "Productie modus": {
+                "Modus": "Series",
+                "Start Serienummer": "TW650",
+                "Eind Serienummer": "TW654",
+                "Serienummers": "TW650\nTW651\nTW652\nTW653\nTW654"
+            },
+            "Ordernummer": "",
+            "Datum": "29-08-2025",
+            "Naam medewerker": ""
+        }
+    },
+    {
+        "product": "Diver",
+        "tijd": "2025-08-29T12:47:43.679127",
+        "data": {
+            "Productielijn": "Diver",
+            "Type": "DI801",
+            "Aantal": "5",
+            "Productie modus": {
+                "Modus": "Series",
+                "Start Serienummer": "TW654",
+                "Eind Serienummer": "TW658",
+                "Serienummers": "TW654\nTW655\nTW656\nTW657\nTW658"
+            },
+            "Ordernummer": "",
+            "Datum": "29-08-2025",
+            "Naam medewerker": ""
+        }
+    },
+    {
+        "product": "Diver",
+        "tijd": "2025-08-29T13:18:34.864121",
+        "data": {
+            "Productielijn": "Diver",
+            "Type": "DI801",
+            "Aantal": "5",
+            "Productie modus": {
+                "Modus": "Series",
+                "Start Serienummer": "TW658",
+                "Eind Serienummer": "TW662",
+                "Serienummers": "TW658\nTW659\nTW660\nTW661\nTW662"
+            },
+            "Ordernummer": "",
+            "Datum": "29-08-2025",
+            "Naam medewerker": ""
+        }
+    },
+    {
+        "product": "Diver",
+        "tijd": "2025-08-29T13:22:31.124436",
+        "data": {
+            "Productielijn": "Diver",
+            "Type": "DI801",
+            "Aantal": "5",
+            "Productie modus": {
+                "Modus": "Series",
+                "Start Serienummer": "TW662",
+                "Eind Serienummer": "TW666",
+                "Serienummers": "TW662\nTW663\nTW664\nTW665\nTW666"
+            },
+            "Ordernummer": "",
+            "Datum": "29-08-2025",
+            "Naam medewerker": ""
+        }
+    },
+    {
+        "product": "Diver",
+        "tijd": "2025-08-29T13:24:12.039033",
+        "data": {
+            "Productielijn": "Diver",
+            "Type": "DI801",
+            "Aantal": "5",
+            "Productie modus": {
+                "Modus": "Series",
+                "Start Serienummer": "TW666",
+                "Eind Serienummer": "TW670",
+                "Serienummers": "TW666\nTW667\nTW668\nTW669\nTW670"
+            },
+            "Ordernummer": "",
+            "Datum": "29-08-2025",
+            "Naam medewerker": ""
+        }
+    },
+    {
+        "product": "Diver",
+        "tijd": "2025-08-29T13:25:55.737587",
+        "data": {
+            "Productielijn": "Diver",
+            "Type": "DI801",
+            "Aantal": "5",
+            "Productie modus": {
+                "Modus": "Series",
+                "Start Serienummer": "TW670",
+                "Eind Serienummer": "TW674",
+                "Serienummers": "TW670\nTW671\nTW672\nTW673\nTW674"
+            },
+            "Ordernummer": "",
+            "Datum": "29-08-2025",
+            "Naam medewerker": ""
+        }
+    },
+    {
+        "product": "Diver",
+        "tijd": "2025-08-29T13:28:04.662121",
+        "data": {
+            "Productielijn": "Diver",
+            "Type": "DI801",
+            "Aantal": "5",
+            "Productie modus": {
+                "Modus": "Series",
+                "Start Serienummer": "TW674",
+                "Eind Serienummer": "TW678",
+                "Serienummers": "TW674\nTW675\nTW676\nTW677\nTW678"
+            },
+            "Ordernummer": "",
+            "Datum": "29-08-2025",
+            "Naam medewerker": ""
+        }
+    },
+    {
+        "product": "Diver",
+        "tijd": "2025-08-29T13:28:38.836934",
+        "data": {
+            "Productielijn": "Diver",
+            "Type": "DI801",
+            "Aantal": "5",
+            "Productie modus": {
+                "Modus": "Series",
+                "Start Serienummer": "TW678",
+                "Eind Serienummer": "TW682",
+                "Serienummers": "TW678\nTW679\nTW680\nTW681\nTW682"
+            },
+            "Ordernummer": "",
+            "Datum": "29-08-2025",
+            "Naam medewerker": ""
+        }
+    },
+    {
+        "product": "Diver",
+        "tijd": "2025-08-29T13:31:05.351176",
+        "data": {
+            "Productielijn": "Diver",
+            "Type": "DI801",
+            "Aantal": "5",
+            "Productie modus": {
+                "Modus": "Series",
+                "Start Serienummer": "TW682",
+                "Eind Serienummer": "TW686",
+                "Serienummers": "TW682\nTW683\nTW684\nTW685\nTW686"
+            },
+            "Ordernummer": "",
+            "Datum": "29-08-2025",
+            "Naam medewerker": ""
+        }
+    },
+    {
+        "product": "Diver",
+        "tijd": "2025-09-01T08:17:21.934519",
+        "data": {
+            "Productielijn": "Diver",
+            "Type": "DI801",
+            "Aantal": "6",
+            "Productie modus": {
+                "Modus": "Series",
+                "Start Serienummer": "TW686",
+                "Eind Serienummer": "TW691",
+                "Serienummers": "TW686\nTW687\nTW688\nTW689\nTW690\nTW691"
+            },
+            "Ordernummer": "",
+            "Datum": "01-09-2025",
+            "Naam medewerker": ""
+        }
+    },
+    {
+        "product": "Diver",
+        "tijd": "2025-09-01T08:18:52.648799",
+        "data": {
+            "Productielijn": "Diver",
+            "Type": "DI801",
+            "Aantal": "5",
+            "Productie modus": {
+                "Modus": "Series",
+                "Start Serienummer": "TW691",
+                "Eind Serienummer": "TW695",
+                "Serienummers": "TW691\nTW692\nTW693\nTW694\nTW695"
+            },
+            "Ordernummer": "",
+            "Datum": "01-09-2025",
+            "Naam medewerker": ""
+        }
+    },
+    {
+        "product": "Diver",
+        "tijd": "2025-09-01T08:21:58.592929",
+        "data": {
+            "Productielijn": "Diver",
+            "Type": "DI801",
+            "Aantal": "5",
+            "Productie modus": {
+                "Modus": "Series",
+                "Start Serienummer": "TW695",
+                "Eind Serienummer": "TW699",
+                "Serienummers": "TW695\nTW696\nTW697\nTW698\nTW699"
+            },
+            "Ordernummer": "",
+            "Datum": "01-09-2025",
+            "Naam medewerker": ""
+        }
+    },
+    {
+        "product": "Diver",
+        "tijd": "2025-09-01T08:24:29.047367",
+        "data": {
+            "Productielijn": "Diver",
+            "Type": "DI801",
+            "Aantal": "5",
+            "Productie modus": {
+                "Modus": "Series",
+                "Start Serienummer": "TW699",
+                "Eind Serienummer": "TW703",
+                "Serienummers": "TW699\nTW700\nTW701\nTW702\nTW703"
+            },
+            "Ordernummer": "",
+            "Datum": "01-09-2025",
+            "Naam medewerker": ""
+        }
+    },
+    {
+        "product": "Diver",
+        "tijd": "2025-09-01T08:25:15.020668",
+        "data": {
+            "Productielijn": "Diver",
+            "Type": "DI801",
+            "Aantal": "5",
+            "Productie modus": {
+                "Modus": "Series",
+                "Start Serienummer": "TW703",
+                "Eind Serienummer": "TW707",
+                "Serienummers": "TW703\nTW704\nTW705\nTW706\nTW707"
+            },
+            "Ordernummer": "",
+            "Datum": "01-09-2025",
+            "Naam medewerker": ""
+        }
+    },
+    {
+        "product": "Diver",
+        "tijd": "2025-09-01T08:26:28.899860",
+        "data": {
+            "Productielijn": "Diver",
+            "Type": "DI801",
+            "Aantal": "5",
+            "Productie modus": {
+                "Modus": "Series",
+                "Start Serienummer": "TW707",
+                "Eind Serienummer": "TW711",
+                "Serienummers": "TW707\nTW708\nTW709\nTW710\nTW711"
+            },
+            "Ordernummer": "",
+            "Datum": "01-09-2025",
+            "Naam medewerker": ""
+        }
+    },
+    {
+        "product": "Diver",
+        "tijd": "2025-09-01T08:26:46.873488",
+        "data": {
+            "Productielijn": "Diver",
+            "Type": "DI801",
+            "Aantal": "5",
+            "Productie modus": {
+                "Modus": "Series",
+                "Start Serienummer": "TW711",
+                "Eind Serienummer": "TW715",
+                "Serienummers": "TW711\nTW712\nTW713\nTW714\nTW715"
+            },
+            "Ordernummer": "",
+            "Datum": "01-09-2025",
+            "Naam medewerker": ""
+        }
+    },
+    {
+        "product": "Diver",
+        "tijd": "2025-09-01T08:27:49.586252",
+        "data": {
+            "Productielijn": "Diver",
+            "Type": "DI801",
+            "Aantal": "5",
+            "Productie modus": {
+                "Modus": "Series",
+                "Start Serienummer": "TW715",
+                "Eind Serienummer": "TW719",
+                "Serienummers": "TW715\nTW716\nTW717\nTW718\nTW719"
+            },
+            "Ordernummer": "",
+            "Datum": "01-09-2025",
+            "Naam medewerker": ""
+        }
+    },
+    {
+        "product": "Diver",
+        "tijd": "2025-09-01T08:28:25.350043",
+        "data": {
+            "Productielijn": "Diver",
+            "Type": "DI801",
+            "Aantal": "5",
+            "Productie modus": {
+                "Modus": "Series",
+                "Start Serienummer": "TW719",
+                "Eind Serienummer": "TW723",
+                "Serienummers": "TW719\nTW720\nTW721\nTW722\nTW723"
+            },
+            "Ordernummer": "",
+            "Datum": "01-09-2025",
+            "Naam medewerker": ""
+        }
+    },
+    {
+        "product": "Diver",
+        "tijd": "2025-09-01T08:30:35.213011",
+        "data": {
+            "Productielijn": "Diver",
+            "Type": "DI801",
+            "Aantal": "5",
+            "Productie modus": {
+                "Modus": "Series",
+                "Start Serienummer": "TW723",
+                "Eind Serienummer": "TW727",
+                "Serienummers": "TW723\nTW724\nTW725\nTW726\nTW727"
+            },
+            "Ordernummer": "",
+            "Datum": "01-09-2025",
+            "Naam medewerker": ""
+        }
+    },
+    {
+        "product": "Diver",
+        "tijd": "2025-09-01T08:31:02.099872",
+        "data": {
+            "Productielijn": "Diver",
+            "Type": "DI801",
+            "Aantal": "5",
+            "Productie modus": {
+                "Modus": "Series",
+                "Start Serienummer": "TW727",
+                "Eind Serienummer": "TW731",
+                "Serienummers": "TW727\nTW728\nTW729\nTW730\nTW731"
+            },
+            "Ordernummer": "",
+            "Datum": "01-09-2025",
+            "Naam medewerker": ""
+        }
+    },
+    {
+        "product": "Diver",
+        "tijd": "2025-09-01T08:31:56.644102",
+        "data": {
+            "Productielijn": "Diver",
+            "Type": "DI801",
+            "Aantal": "5",
+            "Productie modus": {
+                "Modus": "Series",
+                "Start Serienummer": "TW731",
+                "Eind Serienummer": "TW735",
+                "Serienummers": "TW731\nTW732\nTW733\nTW734\nTW735"
+            },
+            "Ordernummer": "",
+            "Datum": "01-09-2025",
+            "Naam medewerker": ""
+        }
+    },
+    {
+        "product": "Diver",
+        "tijd": "2025-09-01T08:32:40.638319",
+        "data": {
+            "Productielijn": "Diver",
+            "Type": "DI801",
+            "Aantal": "5",
+            "Productie modus": {
+                "Modus": "Series",
+                "Start Serienummer": "TW735",
+                "Eind Serienummer": "TW739",
+                "Serienummers": "TW735\nTW736\nTW737\nTW738\nTW739"
+            },
+            "Ordernummer": "",
+            "Datum": "01-09-2025",
+            "Naam medewerker": ""
+        }
+    },
+    {
+        "product": "Diver",
+        "tijd": "2025-09-01T08:39:29.354099",
+        "data": {
+            "Productielijn": "Diver",
+            "Type": "DI801",
+            "Aantal": "5",
+            "Productie modus": {
+                "Modus": "Series",
+                "Start Serienummer": "TW739",
+                "Eind Serienummer": "TW743",
+                "Serienummers": "TW739\nTW740\nTW741\nTW742\nTW743"
+            },
+            "Ordernummer": "",
+            "Datum": "01-09-2025",
+            "Naam medewerker": ""
+        }
+    },
+    {
+        "product": "Diver",
+        "tijd": "2025-09-01T08:39:56.086118",
+        "data": {
+            "Productielijn": "Diver",
+            "Type": "DI801",
+            "Aantal": "5",
+            "Productie modus": {
+                "Modus": "Series",
+                "Start Serienummer": "TW739",
+                "Eind Serienummer": "TW743",
+                "Serienummers": "TW739\nTW740\nTW741\nTW742\nTW743"
+            },
+            "Ordernummer": "",
+            "Datum": "01-09-2025",
+            "Naam medewerker": "",
+            "Instellingen OK": false,
+            "Checklist OK": {
+                "Juiste nulspanplaat gebruikt": false,
+                "Graveermachine correct ingesteld": false,
+                "Juiste submodules geplaatst": false,
+                "divers geplaatst": false
+            }
+        }
+    },
+    {
+        "product": "Diver",
+        "tijd": "2025-09-01T08:40:02.319953",
+        "data": {
+            "Productielijn": "Diver",
+            "Type": "DI801",
+            "Aantal": "5",
+            "Productie modus": {
+                "Modus": "Series",
+                "Start Serienummer": "TW739",
+                "Eind Serienummer": "TW743",
+                "Serienummers": "TW739\nTW740\nTW741\nTW742\nTW743"
+            },
+            "Ordernummer": "",
+            "Datum": "01-09-2025",
+            "Naam medewerker": ""
+        }
+    },
+    {
+        "product": "Diver",
+        "tijd": "2025-09-01T08:43:36.873852",
+        "data": {
+            "Productielijn": "Diver",
+            "Type": "DI801",
+            "Aantal": "5",
+            "Productie modus": {
+                "Modus": "Series",
+                "Start Serienummer": "TW743",
+                "Eind Serienummer": "TW747",
+                "Serienummers": "TW743\nTW744\nTW745\nTW746\nTW747"
+            },
+            "Ordernummer": "",
+            "Datum": "01-09-2025",
+            "Naam medewerker": ""
+        }
+    },
+    {
+        "product": "Diver",
+        "tijd": "2025-09-01T08:44:29.172755",
+        "data": {
+            "Productielijn": "Diver",
+            "Type": "DI801",
+            "Aantal": "5",
+            "Productie modus": {
+                "Modus": "Series",
+                "Start Serienummer": "TW747",
+                "Eind Serienummer": "TW751",
+                "Serienummers": "TW747\nTW748\nTW749\nTW750\nTW751"
+            },
+            "Ordernummer": "",
+            "Datum": "01-09-2025",
+            "Naam medewerker": ""
+        }
+    },
+    {
+        "product": "Diver",
+        "tijd": "2025-09-01T08:45:08.679150",
+        "data": {
+            "Productielijn": "Diver",
+            "Type": "DI801",
+            "Aantal": "5",
+            "Productie modus": {
+                "Modus": "Series",
+                "Start Serienummer": "TW751",
+                "Eind Serienummer": "TW755",
+                "Serienummers": "TW751\nTW752\nTW753\nTW754\nTW755"
+            },
+            "Ordernummer": "",
+            "Datum": "01-09-2025",
+            "Naam medewerker": ""
+        }
+    },
+    {
+        "product": "Diver",
+        "tijd": "2025-09-01T08:46:57.092850",
+        "data": {
+            "Productielijn": "Diver",
+            "Type": "DI801",
+            "Aantal": "5",
+            "Productie modus": {
+                "Modus": "Series",
+                "Start Serienummer": "TW755",
+                "Eind Serienummer": "TW759",
+                "Serienummers": "TW755\nTW756\nTW757\nTW758\nTW759"
+            },
+            "Ordernummer": "",
+            "Datum": "01-09-2025",
+            "Naam medewerker": ""
+        }
     }
 ]

@@ -311,25 +311,9 @@ class App(ctk.CTk):
 
         self.personWidgets()
 
-    def show_device_status(self, device_ports, control_frame):
-        for device_name, port in device_ports.items():
-            # Maak een frame voor het apparaat + statuslampje
-            device_frame = ctk.CTkFrame(control_frame, fg_color="transparent")
-            device_frame.pack(pady=5, fill="x")
-
-            # Zet een statuslampje met tekst
-            status_color = "green" if port else "red"
-            status_text = "🟢 Verbonden" if port else "🔴 Niet gevonden"
-            # Apparaatnaam + poort
-            device_label = ctk.CTkLabel(device_frame, text=f"{device_name}:", font=self.font)
-            device_label.pack(side="left", padx=(0, 10))
-
-            # Statuslampje label
-            status_label = ctk.CTkLabel(device_frame, text=status_text, font=self.font, text_color=status_color)
-            status_label.pack(side="left")
-
     def load_controle_screen(self):
         checklist_items = []
+
         # Frame voor de instellingen en serienummers
         content_frame = ctk.CTkFrame(self.main_frame)
         content_frame.pack(fill="x", pady=10)
@@ -347,31 +331,52 @@ class App(ctk.CTk):
         label = ctk.CTkLabel(left_frame, text=weergave_tekst, justify="left", anchor="w", font=self.font)
         label.pack(anchor="w", pady=10)
 
-        # Toon de serienummers in het rechter frame
-        ctk.CTkLabel(right_frame, text="Serienummers:", font=self.font, justify='right', anchor='e').pack(anchor="e", pady=10)
-
+        # Toon de serienummers
+        ctk.CTkLabel(right_frame, text="Serienummers:", font=self.font, justify='right', anchor='e').pack(anchor="e",
+                                                                                                          pady=10)
         productie_modus = self.instellingen_data.get("Productie modus", {})
+
         if productie_modus.get("Modus") == SERIE:
             serials = generate_serials(self.serial_entry.get().upper(), int(self.amount_entry.get()),
                                        PRODUCT_CONFIG[self.selected_product]["serial_pattern"])
             if serials:
                 for serial in serials:
                     ctk.CTkLabel(right_frame, text=serial, font=self.font).pack(anchor="e", pady=2)
+
         elif productie_modus.get("Modus") == ENKEL:
             serials = productie_modus.get("Serienummers", "").split("\n")
             for serial in serials:
                 if serial.strip():
                     ctk.CTkLabel(right_frame, text=serial.strip(), font=self.font).pack(anchor="e", pady=2)
 
-
         # Frame voor de switches en bevestigingsknop
         control_frame = ctk.CTkFrame(self.main_frame)
         control_frame.pack(fill="x", pady=10)
 
-        self.show_device_status(device_ports, control_frame)
+        # === Device status frame ===
+        device_frame = ctk.CTkFrame(control_frame, fg_color="transparent")
+        device_frame.pack(pady=5, fill="x")
+
+        # Dictionary voor labels per device
+        self.device_status_labels = {}
+
+        for naam in DEVICES:
+            row = ctk.CTkFrame(device_frame, fg_color="transparent")
+            row.pack(anchor="w", pady=2)
+
+            label = ctk.CTkLabel(row, text=f"{naam}:", font=self.font)
+            label.pack(side="left", padx=(0, 10))
+
+            status_label = ctk.CTkLabel(row, text="...", font=self.font)
+            status_label.pack(side="left")
+
+            self.device_status_labels[naam] = status_label
+
+        # Start device status updater
+        self.show_device_status(device_ports)
+
         # Switch: Kloppen de instellingen?
         self.instellingen_ok = ctk.BooleanVar(value=False)
-
         switch_label = ctk.CTkLabel(left_frame, text="Kloppen de instellingen?", font=self.font)
         switch_label.pack(side="left", padx=(0, 10))
 
@@ -384,8 +389,9 @@ class App(ctk.CTk):
             font=self.font
         )
         self.instellingen_switch.pack(side="left")
+
+        # Checklist
         checklist_items = PRODUCT_CONFIG[self.selected_product].get('check_list_items', [])
-        # Switches voor fysieke checklist
         self.checklist_vars = {}
 
         checklist_frame = ctk.CTkFrame(control_frame)
@@ -401,19 +407,21 @@ class App(ctk.CTk):
             switch = ctk.CTkSwitch(checklist_frame, text="", variable=var)
             switch.grid(row=i, column=1, sticky="e", padx=10, pady=5)
 
-        if device_ports.get("barcodescanner") is None:
-            # Als de barcodescanner niet gevonden is, toon een waarschuwing
-            warning_label = ctk.CTkLabel(control_frame, text="⚠️ Barcodescanner niet gevonden!", font=self.font, text_color="red")
-            warning_label.pack(pady=5)
-
-        if device_ports.get("arduino Due") is None:
-            # Als de Arduino Due niet gevonden is, toon een waarschuwing
-            warning_label = ctk.CTkLabel(control_frame, text="⚠️ Arduino Due niet gevonden!", font=self.font, text_color="red")
-            warning_label.pack(pady=5)
-
         # Bevestigknop
-        bevestig_button = ctk.CTkButton(control_frame, text="Bevestigen", command=lambda: bevestig(self), font=self.font)
+        bevestig_button = ctk.CTkButton(control_frame, text="Bevestigen", command=lambda: bevestig(self),
+                                        font=self.font)
         bevestig_button.pack(pady=20)
+
+    def show_device_status(self, device_ports):
+        for device_name, port in device_ports.items():
+            status_label = self.device_status_labels[device_name]
+            status_color = positive_feedback_color if port else negative_feedback_color
+            status_text = "🟢 Verbonden" if port else "🔴 Niet gevonden"
+            status_label.configure(text=status_text, text_color=status_color, font=self.font)
+
+        # Plan volgende update over 1 seconde
+        device_ports = init_device()  # haalt de actuele verbindingen op
+        self.after(1000, lambda: self.show_device_status(device_ports))
 
     def load_besturing_screen(self):
         # --- Frame voor knoppen en status ---

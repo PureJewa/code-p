@@ -74,6 +74,7 @@ segmented_button_values = [
     "Controle",
     "Besturing"
 ]
+
 def init_device(retry):
     from helperfunctions import find_all_devices
 

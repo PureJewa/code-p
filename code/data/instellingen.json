@@ -2,16 +2,16 @@
     "Diver": {
         "Productielijn": "Diver",
         "Type": "DI801",
-        "Aantal": "4",
+        "Aantal": "5",
         "Productie modus": {
             "Modus": "Series",
-            "Start Serienummer": "TW631",
-            "Eind Serienummer": "TW634",
-            "Serienummers": "TW631\nTW632\nTW633\nTW634"
+            "Start Serienummer": "TW755",
+            "Eind Serienummer": "TW759",
+            "Serienummers": "TW755\nTW756\nTW757\nTW758\nTW759"
         },
-        "Ordernummer": "1234",
-        "Datum": "29-08-2025",
-        "Naam medewerker": "j"
+        "Ordernummer": "",
+        "Datum": "01-09-2025",
+        "Naam medewerker": ""
     },
     "CTD": {
         "Productielijn": "CTD",
